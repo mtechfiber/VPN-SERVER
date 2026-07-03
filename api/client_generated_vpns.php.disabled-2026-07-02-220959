@@ -1,0 +1,36 @@
+<?php
+header('Content-Type: application/json');
+
+$base = realpath(__DIR__ . "/..");
+$file = $base . "/data/client_generated_vpns.json";
+
+function clean_client($s){
+    $s = trim((string)$s);
+    $s = preg_replace('/\s+(DASHBOARD|TOTAL|ONLINE|OFFLINE|AVAILABLE|FUND|SEARCH|SHOW|RESET|REFRESH|ALL).*$/i', '', $s);
+    $parts = preg_split('/\s+/', trim($s));
+    return trim($parts[0] ?? $s);
+}
+
+$client = clean_client($_GET["client"] ?? "");
+
+$data = [];
+
+if (file_exists($file)) {
+    $tmp = json_decode(file_get_contents($file), true);
+    if (is_array($tmp)) $data = $tmp;
+}
+
+$list = [];
+
+foreach ($data as $k => $items) {
+    if (strtolower(trim($k)) === strtolower($client) && is_array($items)) {
+        $list = $items;
+        break;
+    }
+}
+
+echo json_encode([
+    "ok" => true,
+    "client" => $client,
+    "items" => $list
+], JSON_UNESCAPED_SLASHES);

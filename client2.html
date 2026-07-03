@@ -1,0 +1,6283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<!-- REAL UPLOAD BRANDING FAVICON START -->
+<link rel="shortcut icon" type="image/x-icon" href="/favicons/brand-1783017298.ico">
+<link rel="icon" type="image/x-icon" href="/favicons/brand-1783017298.ico">
+<link rel="icon" type="image/png" sizes="512x512" href="/favicons/brand-1783017298.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-1783017298.png">
+<meta name="theme-color" content="#0d47a1">
+<meta name="apple-mobile-web-app-title" content="VPN Portal">
+<meta name="application-name" content="VPN Portal">
+<!-- REAL UPLOAD BRANDING FAVICON END -->
+
+
+<!-- REAL BRAND FAVICON SYNC START -->
+<!-- REAL BRAND FAVICON SYNC END -->
+
+
+
+
+
+
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VPN Portal</title>
+<style>
+*{box-sizing:border-box;font-family:Arial,sans-serif}
+body{
+    margin:0;
+    min-height:100vh;
+    background:linear-gradient(135deg,#eef5ff,#ffffff,#edf4ff);
+    color:#10264a;
+}
+.hidden{display:none!important}
+.app{max-width:1120px;margin:0 auto;padding:18px}
+.header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:12px;
+    margin-bottom:14px;
+}
+.header h1{margin:0;font-size:26px}
+.header small{display:block;color:#64748b;font-weight:900;margin-top:4px}
+.logout{
+    border:0;
+    background:#111827;
+    color:white;
+    padding:10px 14px;
+    border-radius:10px;
+    font-weight:900;
+    cursor:pointer;
+}
+.cards{
+    display:grid;
+    grid-template-columns:1fr 1fr 1fr;
+    gap:10px;
+    margin-bottom:14px;
+}
+.card{
+    background:white;
+    border:1px solid #dbe5f3;
+    border-radius:14px;
+    padding:14px;
+}
+.card small{display:block;color:#64748b;font-size:12px;font-weight:900}
+.card b{display:block;margin-top:6px;font-size:24px}
+.panel{
+    background:white;
+    border:1px solid #dbe5f3;
+    border-radius:15px;
+    padding:14px;
+}
+.tools{
+    display:flex;
+    gap:8px;
+    margin-bottom:12px;
+}
+.tools input{
+    width:100%;
+    border:1px solid #cbd8ea;
+    border-radius:11px;
+    padding:11px;
+    font-weight:800;
+    outline:none;
+}
+.table-wrap{
+    overflow:auto;
+    border:1px solid #e2e8f0;
+    border-radius:13px;
+}
+table{
+    width:100%;
+    border-collapse:collapse;
+    min-width:850px;
+}
+th,td{
+    padding:11px 10px;
+    border-bottom:1px solid #e5edf7;
+    text-align:left;
+    vertical-align:middle;
+}
+th{
+    background:#f5f8fd;
+    font-size:12px;
+    text-transform:uppercase;
+    font-weight:900;
+}
+.vpn-name{font-weight:900}
+.addr{
+    display:inline-flex;
+    gap:7px;
+    align-items:center;
+    background:#eef5ff;
+    border:1px solid #d4e3f8;
+    padding:7px 9px;
+    border-radius:9px;
+    font-weight:900;
+    cursor:pointer;
+}
+.badge,.day-badge{
+    display:inline-block;
+    min-width:92px;
+    text-align:center;
+    padding:7px 9px;
+    border-radius:999px;
+    font-size:12px;
+    font-weight:900;
+}
+.checking{background:#e2e8f0;color:#334155}
+.online{background:#dcfce7;color:#166534}
+.offline{background:#fee2e2;color:#991b1b}
+.enabled{background:#dcfce7;color:#166534}
+.disabled{background:#fee2e2;color:#991b1b}
+.day-ok{background:#e0f2fe;color:#075985}
+.day-expired{background:#fee2e2;color:#991b1b}
+.day-none{background:#e2e8f0;color:#334155}
+.btn{
+    border:0;
+    background:#0d47a1;
+    color:white;
+    padding:8px 11px;
+    border-radius:9px;
+    font-weight:900;
+    cursor:pointer;
+}
+.btn:disabled{
+    opacity:.45;
+    cursor:not-allowed;
+}
+.toggle{
+    position:relative;
+    width:54px;
+    height:30px;
+    display:inline-block;
+}
+.toggle input{display:none}
+.slider{
+    position:absolute;
+    inset:0;
+    background:#cbd5e1;
+    border-radius:999px;
+    cursor:pointer;
+}
+.slider:before{
+    content:"";
+    position:absolute;
+    width:24px;
+    height:24px;
+    left:3px;
+    top:3px;
+    background:white;
+    border-radius:50%;
+    transition:.18s;
+}
+.toggle input:checked + .slider{background:#0d47a1}
+.toggle input:checked + .slider:before{transform:translateX(24px)}
+.toggle input:disabled + .slider{opacity:.45;cursor:not-allowed}
+.modal{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(15,23,42,.45);
+    z-index:999999;
+    align-items:center;
+    justify-content:center;
+    padding:18px;
+}
+.modal-box{
+    width:720px;
+    max-width:96%;
+    background:white;
+    border-radius:18px;
+    padding:18px;
+}
+.modal-box h2{margin:0 0 12px}
+.modal-box textarea{
+    width:100%;
+    height:300px;
+    border:1px solid #cbd8ea;
+    border-radius:12px;
+    padding:12px;
+    font-family:monospace;
+}
+.modal-actions{
+    display:flex;
+    justify-content:flex-end;
+    gap:8px;
+    margin-top:10px;
+}
+@media(max-width:720px){
+    .app{padding:10px}
+    .cards{grid-template-columns:1fr}
+    .header h1{font-size:22px}
+    th,td{padding:9px 8px}
+}
+
+<style>
+/* CLIENT VPN NICKNAME EDIT */
+.vpn-name-wrap{
+    display:flex;
+    flex-direction:column;
+    gap:4px;
+    align-items:flex-start;
+}
+
+.vpn-name-line{
+    display:flex;
+    align-items:center;
+    gap:7px;
+    flex-wrap:wrap;
+}
+
+.nick-edit-btn{
+    border:0;
+    background:#eef5ff;
+    color:#0d47a1;
+    padding:5px 8px;
+    border-radius:8px;
+    font-size:11px;
+    font-weight:900;
+    cursor:pointer;
+}
+
+.vpn-real-name{
+    font-size:11px;
+    color:#64748b;
+    font-weight:800;
+}
+
+#nicknameModal{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(15,23,42,.45);
+    z-index:9999999;
+    align-items:center;
+    justify-content:center;
+    padding:18px;
+}
+
+.nickname-box{
+    width:430px;
+    max-width:96%;
+    background:white;
+    border-radius:18px;
+    padding:18px;
+    box-shadow:0 20px 60px rgba(0,0,0,.22);
+}
+
+.nickname-box h2{
+    margin:0 0 12px;
+    color:#10264a;
+}
+
+.nickname-field{
+    margin-bottom:12px;
+}
+
+.nickname-field label{
+    display:block;
+    font-size:12px;
+    font-weight:900;
+    color:#475569;
+    margin-bottom:6px;
+}
+
+.nickname-field input{
+    width:100%;
+    border:1px solid #cbd8ea;
+    border-radius:12px;
+    padding:11px;
+    font-weight:800;
+    color:#10264a;
+    outline:none;
+}
+
+.nickname-actions{
+    display:flex;
+    justify-content:flex-end;
+    gap:8px;
+}
+
+.nickname-actions button{
+    border:0;
+    padding:10px 13px;
+    border-radius:10px;
+    font-weight:900;
+    cursor:pointer;
+}
+
+.nick-close{
+    background:#e5e7eb;
+    color:#111827;
+}
+
+.nick-save{
+    background:#0d47a1;
+    color:white;
+}
+
+/* CLIENT BY TEXT NORMAL */
+.header small{
+    font-weight:400 !important;
+}
+
+</style>
+
+</style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+<body>
+
+<div class="app">
+    <div class="header">
+        <div>
+            <h1>VPN Portal</h1>
+            <small>by: MarvinConfiguration</small>
+            <div id="clientGreeting" class="client-greeting">Hi, Client</div>
+        </div>
+        <button class="logout" onclick="logout()">Logout</button>
+    </div>
+
+    <div class="cards">
+        <div class="card">
+            <small>Total VPN</small>
+            <b id="totalVpn">0</b>
+        </div>
+        <div class="card">
+            <small>Online</small>
+            <b id="totalOnline">0</b>
+        </div>
+        <div class="card">
+            <small>Offline</small>
+            <b id="totalOffline">0</b>
+        </div>
+    </div>
+
+    <div class="panel">
+        <div class="tools">
+            <input id="searchBox" type="text" placeholder="Search VPN name..." oninput="render()">
+        </div>
+
+        <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th>WINBOX NAME</th>
+                        <th>VPN Address</th>
+                        <th>Script</th>
+                        <th>Online</th>
+                        <th>Uptime</th>
+                        <th>Day Left</th>
+                        <th>Enable / Disable</th>
+                        
+                    </tr>
+                </thead>
+                <tbody id="vpnTable">
+                    <tr><td colspan="7">Loading...</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div id="scriptModal" class="modal">
+    <div class="modal-box">
+        <h2>VPN Script</h2>
+        <textarea id="scriptOutput" readonly></textarea>
+        <div class="modal-actions">
+            <button class="btn" onclick="closeScript()">Close</button>
+            <button class="btn" onclick="copyScript()">Copy</button>
+        </div>
+    </div>
+</div>
+
+<script>
+let loginUser = localStorage.getItem("vpnLoginUser") || "";
+let role = localStorage.getItem("vpnRole") || "";
+let clients = [];
+let myVpns = [];
+let statusCache = {};
+
+if(localStorage.getItem("vpnLoggedIn") !== "yes" || role !== "client"){
+    location.href = "/?v=client-login";
+}
+
+function logout(){
+    localStorage.removeItem("vpnLoggedIn");
+    localStorage.removeItem("vpnRole");
+    localStorage.removeItem("vpnLoginUser");
+    location.href = "/?v=logout";
+}
+
+function getVpnNames(client){
+    if(Array.isArray(client.vpnNames)) return client.vpnNames;
+    if(typeof client.vpnNames === "string"){
+        return client.vpnNames.split(/[\n,]+/).map(x => x.trim()).filter(Boolean);
+    }
+    return [];
+}
+
+async function loadClients(){
+    try{
+        let res = await fetch("api/clients_store.php?ts=" + Date.now(), {cache:"no-store"});
+        let data = await res.json();
+        if(data.ok && Array.isArray(data.clients)){
+            clients = data.clients;
+        }
+    }catch(e){
+        clients = JSON.parse(localStorage.getItem("vpnClients") || "[]");
+    }
+
+    let me = clients.find(c => String(c.username || "").trim() === loginUser);
+
+    if(!me){
+        myVpns = [];
+        return;
+    }
+
+    myVpns = getVpnNames(me);
+}
+
+function safeId(text){
+    return btoa(unescape(encodeURIComponent(text))).replace(/=/g,"");
+}
+
+async function getTargetChr(vpnName){
+    try{
+        let res = await fetch("api/target_one.php?vpnName=" + encodeURIComponent(vpnName) + "&ts=" + Date.now(), {cache:"no-store"});
+        let data = await res.json();
+        if(data.ok && data.chr) return data.chr;
+    }catch(e){}
+    return "chr2";
+}
+
+async function getComment(vpnName, chr){
+    let domain = chr === "chr1" ? "vpn.marvincloud1.link" : "vpn.marvincloud2.link";
+    let port = "0000";
+    let comment = vpnName + " | WINBOX: 0000 | EXP: UNKNOWN";
+
+    try{
+        let res = await fetch("api/get_secret_comment.php", {
+            method:"POST",
+            headers:{"Content-Type":"application/json"},
+            cache:"no-store",
+            body:JSON.stringify({vpnName, chr})
+        });
+
+        let data = await res.json();
+
+        if(data.ok){
+            if(data.domain) domain = data.domain;
+            if(data.port) port = data.port;
+            if(data.comment) comment = data.comment;
+        }
+    }catch(e){}
+
+    return {domain, port, comment};
+}
+
+async function getStatus(vpnName){
+    try{
+        let res = await fetch("api/vpn_status_one.php", {
+            method:"POST",
+            headers:{"Content-Type":"application/json"},
+            cache:"no-store",
+            body:JSON.stringify({vpnName})
+        });
+
+        let data = await res.json();
+        statusCache[vpnName] = data;
+        return data;
+    }catch(e){
+        let data = {ok:false,error:e.message,dayLeftText:"ERROR",expired:false,online:false,enabled:false};
+        statusCache[vpnName] = data;
+        return data;
+    }
+}
+
+function render(){
+    let q = (document.getElementById("searchBox").value || "").toLowerCase();
+    let list = myVpns.filter(v => v.toLowerCase().includes(q));
+    let tbody = document.getElementById("vpnTable");
+
+    if(list.length === 0){
+        tbody.innerHTML = `<tr><td colspan="7">No VPN found.</td></tr>`;
+        document.getElementById("totalVpn").innerText = myVpns.length;
+        document.getElementById("totalOnline").innerText = "0";
+        document.getElementById("totalOffline").innerText = "0";
+        return;
+    }
+
+    tbody.innerHTML = list.map(vpn => {
+        let id = safeId(vpn);
+        return `
+            <tr>
+                <td>
+                    <div class="vpn-name-wrap">
+                        <div class="vpn-name-line">
+                            <span class="vpn-name" id="nick_${id}" data-vpn="${vpn}">${vpn}</span>
+                            <button class="nick-edit-btn" type="button" onclick="openNicknameModal('${encodeURIComponent(vpn)}')">Edit</button>
+                        </div>
+                        <div class="vpn-real-name" id="real_${id}"></div>
+                    </div>
+                </td>
+                <td><span class="addr" title="Click to copy" id="addr_${id}" onclick="copyAddress('${id}')">Loading...</span></td>
+                <td><button class="btn" id="script_${id}" onclick="openScript('${encodeURIComponent(vpn)}')">Script</button></td>
+                <td><span class="badge checking" id="online_${id}">CHECKING</span></td>
+                <td><span class="uptime-badge uptime-offline" id="uptime_${id}">CHECKING</span></td>
+                <td><span class="day-badge checking" id="day_${id}">CHECKING</span></td>
+                <td>
+                    <label class="toggle">
+                        <input type="checkbox" id="toggle_${id}" onchange="toggleVpn('${encodeURIComponent(vpn)}', this)">
+                        <span class="slider"></span>
+                    </label>
+                </td>
+            </tr>
+        `;
+    }).join("");
+
+    document.getElementById("totalVpn").innerText = myVpns.length;
+
+    list.forEach(vpn => loadRow(vpn));
+}
+
+async function loadRow(vpnName){
+    let id = safeId(vpnName);
+    let addrEl = document.getElementById("addr_" + id);
+    let onlineEl = document.getElementById("online_" + id);
+    let dayEl = document.getElementById("day_" + id);
+    let toggleEl = document.getElementById("toggle_" + id);
+    let scriptBtn = document.getElementById("script_" + id);
+
+    let chr = await getTargetChr(vpnName);
+    let commentData = await getComment(vpnName, chr);
+
+    if(addrEl){
+        addrEl.innerText = commentData.domain + ":" + commentData.port;
+        addrEl.setAttribute("data-copy", commentData.domain + ":" + commentData.port);
+    }
+
+    let data = await getStatus(vpnName);
+
+    if(onlineEl){
+        if(data.ok && data.online){
+            onlineEl.className = "badge online";
+            onlineEl.innerText = "ONLINE";
+        }else{
+            onlineEl.className = "badge offline";
+            onlineEl.innerText = data.ok ? "OFFLINE" : "ERROR";
+        }
+    }
+
+    if(dayEl){
+        let text = data.dayLeftText || "";
+
+        if(!text){
+            if(data.expired){
+                text = "EXPIRED";
+            }else if(data.daysLeft !== null && data.daysLeft !== undefined){
+                text = data.daysLeft + " day(s)";
+            }else{
+                text = "NO EXP";
+            }
+        }
+
+        dayEl.innerText = text;
+
+        if(text === "EXPIRED" || data.expired){
+            dayEl.className = "day-badge day-expired";
+        }else if(text === "NO EXP" || text === "ERROR"){
+            dayEl.className = "day-badge day-none";
+        }else{
+            dayEl.className = "day-badge day-ok";
+        }
+    }
+
+    let locked = !!data.expired;
+
+    if(toggleEl){
+        toggleEl.checked = !!data.enabled;
+        toggleEl.disabled = locked || !data.ok;
+    }
+
+    if(scriptBtn){
+        scriptBtn.disabled = locked || !data.ok;
+        scriptBtn.innerText = locked ? "Expired" : "Script";
+    }
+
+    updateTotals();
+}
+
+function updateTotals(){
+    let online = 0;
+    let offline = 0;
+
+    myVpns.forEach(vpn => {
+        let data = statusCache[vpn];
+        if(!data) return;
+
+        if(data.ok && data.online) online++;
+        else offline++;
+    });
+
+    document.getElementById("totalOnline").innerText = online;
+    document.getElementById("totalOffline").innerText = offline;
+}
+
+async function toggleVpn(encoded, el){
+    let vpnName = decodeURIComponent(encoded);
+    let wanted = el.checked;
+
+    el.disabled = true;
+
+    try{
+        let res = await fetch("api/vpn_toggle_one.php", {
+            method:"POST",
+            headers:{"Content-Type":"application/json"},
+            cache:"no-store",
+            body:JSON.stringify({vpnName, enabled:wanted})
+        });
+
+        let data = await res.json();
+
+        if(!data.ok){
+            alert(data.error || "Toggle failed");
+        }
+
+        await loadRow(vpnName);
+    }catch(e){
+        alert("Toggle error: " + e.message);
+        await loadRow(vpnName);
+    }
+}
+
+async function openScript(encoded){
+    let vpnName = decodeURIComponent(encoded);
+    let chr = await getTargetChr(vpnName);
+    let data = await getComment(vpnName, chr);
+
+    let password = "1";
+    let me = clients.find(c => String(c.username || "").trim() === loginUser);
+    if(me && me.password) password = me.password;
+
+    document.getElementById("scriptOutput").value =
+`/interface sstp-client
+add connect-to=${data.domain} disabled=no name="VPN_REMOTE" password=${password} profile=default-encryption user="${vpnName}" comment="${data.comment}"
+
+/ip firewall filter
+add action=accept chain=input comment="ALLOW VPN REMOTE" in-interface="VPN_REMOTE"
+add action=accept chain=forward comment="ALLOW VPN REMOTE" in-interface="VPN_REMOTE"`;
+
+    document.getElementById("scriptModal").style.display = "flex";
+}
+
+function closeScript(){
+    document.getElementById("scriptModal").style.display = "none";
+}
+
+async function copyScript(){
+    let txt = document.getElementById("scriptOutput").value;
+    await navigator.clipboard.writeText(txt);
+    alert("Copied");
+}
+
+async function copyAddress(id){
+    let el = document.getElementById("addr_" + id);
+    let text = el.getAttribute("data-copy") || el.innerText;
+    await navigator.clipboard.writeText(text);
+    alert("Copied: " + text);
+}
+
+document.addEventListener("DOMContentLoaded", async function(){
+    await loadClients();
+    render();
+    setInterval(() => {
+        myVpns.forEach(vpn => loadRow(vpn));
+    }, 30000);
+});
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+/* SAFARI TOGGLE PATTERN FIX */
+(function(){
+    window.safeId = function(text){
+        text = String(text || "");
+        let out = "vpn_";
+
+        for(let i = 0; i < text.length; i++){
+            out += text.charCodeAt(i).toString(16).padStart(4, "0");
+        }
+
+        return out.slice(0, 90);
+    };
+
+    window.safeDecodeVpn = function(value){
+        value = String(value || "");
+
+        try{
+            return decodeURIComponent(value);
+        }catch(e){
+            return value;
+        }
+    };
+
+    window.toggleVpn = async function(encoded, el){
+        let vpnName = window.safeDecodeVpn(encoded);
+        let wanted = !!el.checked;
+
+        el.disabled = true;
+
+        try{
+            let res = await fetch("api/vpn_toggle_one.php", {
+                method:"POST",
+                headers:{"Content-Type":"application/json"},
+                cache:"no-store",
+                body:JSON.stringify({
+                    vpnName:vpnName,
+                    enabled:wanted
+                })
+            });
+
+            let text = await res.text();
+            let data;
+
+            try{
+                data = JSON.parse(text);
+            }catch(e){
+                throw new Error("API returned invalid JSON: " + text.slice(0,120));
+            }
+
+            if(!data.ok){
+                alert(data.error || "Toggle failed");
+            }
+
+            if(typeof loadRow === "function"){
+                await loadRow(vpnName);
+            }
+
+        }catch(e){
+            alert("Toggle error: " + e.message);
+
+            if(typeof loadRow === "function"){
+                await loadRow(vpnName);
+            }else{
+                el.disabled = false;
+            }
+        }
+    };
+})();
+</script>
+
+
+<style>
+/* VPN ADDRESS AUTO COPY */
+.addr{
+    cursor:pointer !important;
+    user-select:none;
+    -webkit-user-select:none;
+}
+
+.addr:active{
+    transform:scale(.98);
+}
+
+.copy-toast{
+    position:fixed;
+    left:50%;
+    bottom:24px;
+    transform:translateX(-50%);
+    background:#111827;
+    color:white;
+    padding:11px 16px;
+    border-radius:999px;
+    font-size:13px;
+    font-weight:900;
+    z-index:9999999;
+    box-shadow:0 12px 35px rgba(0,0,0,.25);
+    display:none;
+}
+</style>
+
+<div id="copyToast" class="copy-toast">Copied</div>
+
+<script>
+/* VPN ADDRESS AUTO COPY */
+(function(){
+    function showCopyToast(text){
+        let toast = document.getElementById("copyToast");
+
+        if(!toast){
+            toast = document.createElement("div");
+            toast.id = "copyToast";
+            toast.className = "copy-toast";
+            document.body.appendChild(toast);
+        }
+
+        toast.innerText = text || "Copied";
+        toast.style.display = "block";
+
+        clearTimeout(window.copyToastTimer);
+        window.copyToastTimer = setTimeout(function(){
+            toast.style.display = "none";
+        }, 1400);
+    }
+
+    async function copyTextSafe(text){
+        text = String(text || "").trim();
+
+        if(!text || text === "Loading..."){
+            showCopyToast("No address yet");
+            return false;
+        }
+
+        try{
+            if(navigator.clipboard && window.isSecureContext){
+                await navigator.clipboard.writeText(text);
+                return true;
+            }
+        }catch(e){}
+
+        try{
+            let ta = document.createElement("textarea");
+            ta.value = text;
+            ta.setAttribute("readonly", "");
+            ta.style.position = "fixed";
+            ta.style.left = "-9999px";
+            ta.style.top = "0";
+            document.body.appendChild(ta);
+            ta.focus();
+            ta.select();
+            ta.setSelectionRange(0, 99999);
+
+            let ok = document.execCommand("copy");
+            document.body.removeChild(ta);
+
+            return ok;
+        }catch(e){
+            return false;
+        }
+    }
+
+    window.copyAddress = async function(id){
+        let el = document.getElementById("addr_" + id);
+
+        if(!el){
+            showCopyToast("Address not found");
+            return;
+        }
+
+        let text = el.getAttribute("data-copy") || el.innerText || "";
+
+        let ok = await copyTextSafe(text);
+
+        if(ok){
+            showCopyToast("Copied: " + text);
+        }else{
+            showCopyToast("Copy failed");
+        }
+    };
+
+    document.addEventListener("click", async function(e){
+        let el = e.target.closest(".addr");
+
+        if(!el){
+            return;
+        }
+
+        let text = el.getAttribute("data-copy") || el.innerText || "";
+        let ok = await copyTextSafe(text);
+
+        if(ok){
+            showCopyToast("Copied: " + text);
+        }else{
+            showCopyToast("Copy failed");
+        }
+    });
+})();
+</script>
+
+
+<style>
+/* VPN Portal UPTIME COLUMN */
+.uptime-badge{
+    display:inline-block;
+    min-width:90px;
+    text-align:center;
+    padding:7px 9px;
+    border-radius:999px;
+    font-size:12px;
+    font-weight:900;
+    background:#eef2ff;
+    color:#3730a3;
+}
+.uptime-offline{
+    background:#e2e8f0;
+    color:#334155;
+}
+</style>
+
+<script>
+/* VPN Portal UPTIME COLUMN */
+(function(){
+    window.applyUptimeColumn = function(vpnName, data){
+        if(typeof safeId !== "function") return;
+
+        let id = safeId(vpnName);
+        let uptimeEl = document.getElementById("uptime_" + id);
+
+        if(!uptimeEl) return;
+
+        let txt = data.uptimeText || data.uptime || "";
+
+        if(!data.ok){
+            txt = "ERROR";
+        }else if(!data.online){
+            txt = "OFFLINE";
+        }else if(!txt){
+            txt = "ONLINE";
+        }
+
+        uptimeEl.innerText = txt;
+
+        if(txt === "OFFLINE" || txt === "ERROR"){
+            uptimeEl.className = "uptime-badge uptime-offline";
+        }else{
+            uptimeEl.className = "uptime-badge";
+        }
+    };
+
+    const oldLoadRow = window.loadRow;
+
+    if(typeof oldLoadRow === "function" && !window.loadRowUptimeWrapped){
+        window.loadRowUptimeWrapped = true;
+
+        window.loadRow = async function(vpnName){
+            await oldLoadRow(vpnName);
+
+            try{
+                let res = await fetch("api/vpn_status_one.php", {
+                    method:"POST",
+                    headers:{"Content-Type":"application/json"},
+                    cache:"no-store",
+                    body:JSON.stringify({vpnName:vpnName})
+                });
+
+                let data = await res.json();
+
+                if(typeof applyUptimeColumn === "function"){
+                    applyUptimeColumn(vpnName, data);
+                }
+            }catch(e){
+                if(typeof safeId === "function"){
+                    let el = document.getElementById("uptime_" + safeId(vpnName));
+                    if(el){
+                        el.innerText = "ERROR";
+                        el.className = "uptime-badge uptime-offline";
+                    }
+                }
+            }
+        };
+    }
+})();
+</script>
+
+
+<style>
+/* VPN Portal ONLINE OFFLINE FILTER */
+.tools{
+    display:flex;
+    gap:8px;
+    align-items:center;
+}
+
+.tools select{
+    border:1px solid #cbd8ea;
+    border-radius:11px;
+    padding:11px;
+    font-weight:900;
+    outline:none;
+    background:white;
+    color:#10264a;
+    min-width:130px;
+}
+
+@media(max-width:720px){
+    .tools{
+        flex-direction:column;
+        align-items:stretch;
+    }
+
+    .tools select{
+        width:100%;
+    }
+}
+</style>
+
+<script>
+/* VPN Portal ONLINE OFFLINE FILTER */
+(function(){
+    function ensureStatusFilter(){
+        let tools = document.querySelector(".tools");
+
+        if(!tools){
+            return;
+        }
+
+        if(document.getElementById("statusFilter")){
+            return;
+        }
+
+        let select = document.createElement("select");
+        select.id = "statusFilter";
+        select.innerHTML = `
+            <option value="all">All</option>
+            <option value="online">Online</option>
+            <option value="offline">Offline</option>
+        `;
+
+        select.onchange = function(){
+            applyClientStatusFilter();
+        };
+
+        tools.appendChild(select);
+    }
+
+    window.applyClientStatusFilter = function(){
+        let filter = document.getElementById("statusFilter");
+
+        if(!filter){
+            return;
+        }
+
+        let value = filter.value;
+        let rows = document.querySelectorAll("#vpnTable tr");
+
+        rows.forEach(row => {
+            let onlineCell = row.querySelector("[id^='online_']");
+
+            if(!onlineCell){
+                row.style.display = "";
+                return;
+            }
+
+            let status = (onlineCell.innerText || "").trim().toLowerCase();
+
+            if(value === "all"){
+                row.style.display = "";
+                return;
+            }
+
+            if(value === "online"){
+                row.style.display = status === "online" ? "" : "none";
+                return;
+            }
+
+            if(value === "offline"){
+                row.style.display = (status === "offline" || status === "error") ? "" : "none";
+                return;
+            }
+        });
+    };
+
+    const oldRender = window.render;
+
+    if(typeof oldRender === "function" && !window.renderStatusFilterWrapped){
+        window.renderStatusFilterWrapped = true;
+
+        window.render = function(){
+            oldRender();
+
+            setTimeout(function(){
+                ensureStatusFilter();
+                applyClientStatusFilter();
+            }, 200);
+        };
+    }
+
+    const oldLoadRow = window.loadRow;
+
+    if(typeof oldLoadRow === "function" && !window.loadRowStatusFilterWrapped){
+        window.loadRowStatusFilterWrapped = true;
+
+        window.loadRow = async function(vpnName){
+            await oldLoadRow(vpnName);
+
+            setTimeout(function(){
+                applyClientStatusFilter();
+            }, 100);
+        };
+    }
+
+    document.addEventListener("DOMContentLoaded", function(){
+        setTimeout(function(){
+            ensureStatusFilter();
+            applyClientStatusFilter();
+        }, 500);
+
+        setTimeout(function(){
+            ensureStatusFilter();
+            applyClientStatusFilter();
+        }, 1500);
+    });
+})();
+</script>
+
+
+<style>
+/* VPN Portal FILTER RESET */
+.client-filter-reset{
+    border:0;
+    background:#111827;
+    color:white;
+    padding:11px 13px;
+    border-radius:10px;
+    font-weight:900;
+    cursor:pointer;
+    white-space:nowrap;
+}
+
+@media(max-width:720px){
+    .client-filter-reset{
+        width:100%;
+    }
+}
+</style>
+
+<script>
+/* VPN Portal FILTER RESET */
+(function(){
+    function ensureClientResetButton(){
+        let tools = document.querySelector(".tools");
+
+        if(!tools){
+            return;
+        }
+
+        if(document.getElementById("clientFilterReset")){
+            return;
+        }
+
+        let btn = document.createElement("button");
+        btn.type = "button";
+        btn.id = "clientFilterReset";
+        btn.className = "client-filter-reset";
+        btn.innerText = "Reset";
+        btn.onclick = function(){
+            resetClientFilter();
+        };
+
+        tools.appendChild(btn);
+    }
+
+    window.resetClientFilter = function(){
+        let search = document.getElementById("searchBox");
+        let filter = document.getElementById("statusFilter");
+
+        if(search){
+            search.value = "";
+        }
+
+        if(filter){
+            filter.value = "all";
+        }
+
+        if(typeof render === "function"){
+            render();
+        }
+
+        setTimeout(function(){
+            if(typeof applyClientStatusFilter === "function"){
+                applyClientStatusFilter();
+            }
+        }, 200);
+    };
+
+    const oldRender = window.render;
+
+    if(typeof oldRender === "function" && !window.clientResetRenderWrapped){
+        window.clientResetRenderWrapped = true;
+
+        window.render = function(){
+            oldRender();
+
+            setTimeout(function(){
+                ensureClientResetButton();
+
+                if(typeof applyClientStatusFilter === "function"){
+                    applyClientStatusFilter();
+                }
+            }, 150);
+        };
+    }
+
+    document.addEventListener("DOMContentLoaded", function(){
+        setTimeout(function(){
+            ensureClientResetButton();
+        }, 500);
+
+        setTimeout(function(){
+            ensureClientResetButton();
+        }, 1500);
+    });
+})();
+</script>
+
+
+<style>
+/* CLIENT EXPIRED ORANGE STYLE */
+.day-expired,
+.exp-expired,
+.badge.expired,
+.status-dot.expired,
+.expiry.exp-expired,
+.day-badge.day-expired{
+    background:#fff7ed !important;
+    color:#c2410c !important;
+    border:1px solid #fed7aa !important;
+    font-weight:900 !important;
+}
+
+.btn.expired-btn,
+button.expired-btn{
+    background:#fff7ed !important;
+    color:#c2410c !important;
+    border:1px solid #fed7aa !important;
+    opacity:1 !important;
+}
+</style>
+
+<script>
+/* CLIENT EXPIRED ORANGE STYLE */
+(function(){
+    function applyExpiredOrange(){
+        document.querySelectorAll(".day-badge,.expiry,.badge,.status-dot").forEach(el => {
+            let text = (el.innerText || "").trim().toUpperCase();
+
+            if(text === "EXPIRED"){
+                el.classList.add("day-expired");
+            }
+        });
+
+        document.querySelectorAll("button").forEach(btn => {
+            let text = (btn.innerText || "").trim().toUpperCase();
+
+            if(text === "EXPIRED"){
+                btn.classList.add("expired-btn");
+            }
+        });
+    }
+
+    const oldLoadRow = window.loadRow;
+
+    if(typeof oldLoadRow === "function" && !window.clientExpiredOrangeWrapped){
+        window.clientExpiredOrangeWrapped = true;
+
+        window.loadRow = async function(vpnName){
+            await oldLoadRow(vpnName);
+            setTimeout(applyExpiredOrange, 100);
+        };
+    }
+
+    document.addEventListener("DOMContentLoaded", function(){
+        setTimeout(applyExpiredOrange, 500);
+        setTimeout(applyExpiredOrange, 1500);
+        setTimeout(applyExpiredOrange, 3000);
+    });
+})();
+</script>
+
+
+<div id="nicknameModal">
+    <div class="nickname-box">
+        <h2>Edit VPN Nickname</h2>
+
+        <div class="nickname-field">
+            <label>Original WINBOX NAME</label>
+            <input id="nickOriginalVpn" type="text" readonly>
+        </div>
+
+        <div class="nickname-field">
+            <label>Nickname</label>
+            <input id="nickInput" type="text" placeholder="ex: Office VPN">
+        </div>
+
+        <div class="nickname-actions">
+            <button class="nick-close" type="button" onclick="closeNicknameModal()">Close</button>
+            <button class="nick-close" type="button" onclick="clearNicknameModal()">Clear</button>
+            <button class="nick-save" type="button" onclick="saveNicknameModal()">Save</button>
+        </div>
+    </div>
+</div>
+
+<script>
+/* CLIENT VPN NICKNAME EDIT */
+(function(){
+    window.nicknameCache = window.nicknameCache || {};
+    window.currentNicknameVpn = "";
+
+    function decodeVpnSafe(value){
+        value = String(value || "");
+
+        if(typeof safeDecodeVpn === "function"){
+            return safeDecodeVpn(value);
+        }
+
+        try{
+            return decodeURIComponent(value);
+        }catch(e){
+            return value;
+        }
+    }
+
+    async function fetchNickname(vpnName){
+        try{
+            let res = await fetch("api/nickname_one.php?vpnName=" + encodeURIComponent(vpnName) + "&ts=" + Date.now(), {
+                cache:"no-store"
+            });
+
+            let data = await res.json();
+
+            if(data.ok){
+                window.nicknameCache[vpnName] = data.nickname || "";
+                return data.nickname || "";
+            }
+        }catch(e){}
+
+        return window.nicknameCache[vpnName] || "";
+    }
+
+    window.applyNickname = async function(vpnName){
+        if(typeof safeId !== "function"){
+            return;
+        }
+
+        let id = safeId(vpnName);
+        let nameEl = document.getElementById("nick_" + id);
+        let realEl = document.getElementById("real_" + id);
+
+        if(!nameEl){
+            return;
+        }
+
+        let nick = await fetchNickname(vpnName);
+
+        nameEl.innerText = nick || vpnName;
+
+        if(realEl){
+            realEl.innerText = nick ? ("VPN: " + vpnName) : "";
+        }
+    };
+
+    window.applyAllNicknames = function(){
+        document.querySelectorAll(".vpn-name[data-vpn]").forEach(el => {
+            let vpnName = el.getAttribute("data-vpn") || el.innerText || "";
+            if(vpnName){
+                applyNickname(vpnName);
+            }
+        });
+    };
+
+    window.openNicknameModal = async function(encoded){
+        let vpnName = decodeVpnSafe(encoded);
+
+        window.currentNicknameVpn = vpnName;
+
+        document.getElementById("nickOriginalVpn").value = vpnName;
+        document.getElementById("nickInput").value = window.nicknameCache[vpnName] || await fetchNickname(vpnName);
+
+        document.getElementById("nicknameModal").style.display = "flex";
+
+        setTimeout(function(){
+            document.getElementById("nickInput").focus();
+        }, 100);
+    };
+
+    window.closeNicknameModal = function(){
+        document.getElementById("nicknameModal").style.display = "none";
+    };
+
+    window.clearNicknameModal = async function(){
+        document.getElementById("nickInput").value = "";
+        await saveNicknameModal();
+    };
+
+    window.saveNicknameModal = async function(){
+        let vpnName = window.currentNicknameVpn;
+        let nickname = document.getElementById("nickInput").value.trim();
+
+        if(!vpnName){
+            alert("No VPN selected");
+            return;
+        }
+
+        try{
+            let res = await fetch("api/nickname_one.php", {
+                method:"POST",
+                headers:{"Content-Type":"application/json"},
+                cache:"no-store",
+                body:JSON.stringify({
+                    vpnName:vpnName,
+                    nickname:nickname
+                })
+            });
+
+            let data = await res.json();
+
+            if(!data.ok){
+                alert(data.error || "Save failed");
+                return;
+            }
+
+            window.nicknameCache[vpnName] = data.nickname || "";
+
+            await applyNickname(vpnName);
+            closeNicknameModal();
+
+        }catch(e){
+            alert("Save nickname error: " + e.message);
+        }
+    };
+
+    const oldRender = window.render;
+
+    if(typeof oldRender === "function" && !window.nicknameRenderWrapped){
+        window.nicknameRenderWrapped = true;
+
+        window.render = function(){
+            oldRender();
+            setTimeout(applyAllNicknames, 300);
+            setTimeout(applyAllNicknames, 1000);
+        };
+    }
+
+    const oldLoadRow = window.loadRow;
+
+    if(typeof oldLoadRow === "function" && !window.nicknameLoadRowWrapped){
+        window.nicknameLoadRowWrapped = true;
+
+        window.loadRow = async function(vpnName){
+            await oldLoadRow(vpnName);
+            setTimeout(function(){
+                applyNickname(vpnName);
+            }, 100);
+        };
+    }
+
+    document.addEventListener("keydown", function(e){
+        if(e.key === "Escape"){
+            let modal = document.getElementById("nicknameModal");
+            if(modal && modal.style.display === "flex"){
+                closeNicknameModal();
+            }
+        }
+    });
+
+    document.addEventListener("click", function(e){
+        let modal = document.getElementById("nicknameModal");
+        if(modal && modal.style.display === "flex" && e.target === modal){
+            closeNicknameModal();
+        }
+    });
+
+    document.addEventListener("DOMContentLoaded", function(){
+        setTimeout(applyAllNicknames, 600);
+        setTimeout(applyAllNicknames, 1500);
+    });
+})();
+</script>
+
+
+<script>
+/* CLIENT SEARCH BY NICKNAME */
+(function(){
+    window.nicknameCache = window.nicknameCache || {};
+
+    async function loadNicknameForSearch(vpnName){
+        if(window.nicknameCache[vpnName] !== undefined){
+            return window.nicknameCache[vpnName] || "";
+        }
+
+        try{
+            let res = await fetch("api/nickname_one.php?vpnName=" + encodeURIComponent(vpnName) + "&ts=" + Date.now(), {
+                cache:"no-store"
+            });
+
+            let data = await res.json();
+
+            if(data.ok){
+                window.nicknameCache[vpnName] = data.nickname || "";
+                return window.nicknameCache[vpnName];
+            }
+        }catch(e){}
+
+        window.nicknameCache[vpnName] = "";
+        return "";
+    }
+
+    window.preloadNicknamesForSearch = async function(){
+        if(!Array.isArray(myVpns)){
+            return;
+        }
+
+        await Promise.all(myVpns.map(vpn => loadNicknameForSearch(vpn)));
+    };
+
+    window.applyClientStatusFilter = function(){
+        let search = document.getElementById("searchBox");
+        let filter = document.getElementById("statusFilter");
+
+        let q = search ? search.value.trim().toLowerCase() : "";
+        let statusValue = filter ? filter.value : "all";
+
+        let rows = document.querySelectorAll("#vpnTable tr");
+
+        rows.forEach(row => {
+            let onlineCell = row.querySelector("[id^='online_']");
+
+            if(!onlineCell){
+                row.style.display = "";
+                return;
+            }
+
+            let vpnName = row.getAttribute("data-vpn") || "";
+            let nickname = window.nicknameCache[vpnName] || "";
+
+            let textMatch =
+                !q ||
+                vpnName.toLowerCase().includes(q) ||
+                nickname.toLowerCase().includes(q) ||
+                row.innerText.toLowerCase().includes(q);
+
+            let status = (onlineCell.innerText || "").trim().toLowerCase();
+
+            let statusMatch = true;
+
+            if(statusValue === "online"){
+                statusMatch = status === "online";
+            }
+
+            if(statusValue === "offline"){
+                statusMatch = status === "offline" || status === "error";
+            }
+
+            row.style.display = (textMatch && statusMatch) ? "" : "none";
+        });
+    };
+
+    window.render = function(){
+        let tbody = document.getElementById("vpnTable");
+
+        if(!tbody){
+            return;
+        }
+
+        let list = Array.isArray(myVpns) ? myVpns : [];
+
+        if(list.length === 0){
+            tbody.innerHTML = `<tr><td colspan="7">No VPN found.</td></tr>`;
+            let totalVpn = document.getElementById("totalVpn");
+            let totalOnline = document.getElementById("totalOnline");
+            let totalOffline = document.getElementById("totalOffline");
+
+            if(totalVpn) totalVpn.innerText = "0";
+            if(totalOnline) totalOnline.innerText = "0";
+            if(totalOffline) totalOffline.innerText = "0";
+            return;
+        }
+
+        tbody.innerHTML = list.map(vpn => {
+            let id = safeId(vpn);
+            return `
+                <tr data-vpn="${vpn}">
+                    <td>
+                        <div class="vpn-name-wrap">
+                            <div class="vpn-name-line">
+                                <span class="vpn-name" id="nick_${id}" data-vpn="${vpn}">${vpn}</span>
+                                <button class="nick-edit-btn" type="button" onclick="openNicknameModal('${encodeURIComponent(vpn)}')">Edit</button>
+                            </div>
+                            <div class="vpn-real-name" id="real_${id}"></div>
+                        </div>
+                    </td>
+                    <td><span class="addr" title="Click to copy" id="addr_${id}" onclick="copyAddress('${id}')">Loading...</span></td>
+                    <td><button class="btn" id="script_${id}" onclick="openScript('${encodeURIComponent(vpn)}')">Script</button></td>
+                    <td><span class="badge checking" id="online_${id}">CHECKING</span></td>
+                    <td><span class="uptime-badge uptime-offline" id="uptime_${id}">CHECKING</span></td>
+                    <td><span class="day-badge checking" id="day_${id}">CHECKING</span></td>
+                    <td>
+                        <label class="toggle">
+                            <input type="checkbox" id="toggle_${id}" onchange="toggleVpn('${encodeURIComponent(vpn)}', this)">
+                            <span class="slider"></span>
+                        </label>
+                    </td>
+                </tr>
+            `;
+        }).join("");
+
+        let totalVpn = document.getElementById("totalVpn");
+        if(totalVpn) totalVpn.innerText = myVpns.length;
+
+        list.forEach(vpn => {
+            if(typeof loadRow === "function"){
+                loadRow(vpn);
+            }
+        });
+
+        setTimeout(async function(){
+            await preloadNicknamesForSearch();
+
+            if(typeof applyAllNicknames === "function"){
+                applyAllNicknames();
+            }
+
+            applyClientStatusFilter();
+        }, 250);
+    };
+
+    document.addEventListener("DOMContentLoaded", function(){
+        let search = document.getElementById("searchBox");
+
+        if(search){
+            search.oninput = function(){
+                applyClientStatusFilter();
+            };
+        }
+
+        setTimeout(async function(){
+            await preloadNicknamesForSearch();
+            applyClientStatusFilter();
+        }, 1000);
+
+        setTimeout(async function(){
+            await preloadNicknamesForSearch();
+            applyClientStatusFilter();
+        }, 2500);
+    });
+})();
+</script>
+
+
+
+
+
+
+
+<style>
+/* VPN Portal HI BELOW BY */
+.client-greeting{
+    display:block;
+    margin-top:14px;
+    font-weight:900;
+    font-size:17px;
+    margin-top:14px;
+    font-size:17px;
+    font-weight:900;
+    color:#0d47a1;
+}
+</style>
+
+<script>
+/* VPN Portal HI BELOW BY */
+(function(){
+    function escapeHtml(text){
+        return String(text || "")
+            .replace(/&/g,"&amp;")
+            .replace(/</g,"&lt;")
+            .replace(/>/g,"&gt;")
+            .replace(/"/g,"&quot;")
+            .replace(/'/g,"&#039;");
+    }
+
+    function setClientGreeting(){
+        let user = localStorage.getItem("vpnLoginUser") || "";
+
+        if(!user && typeof loginUser !== "undefined"){
+            user = loginUser;
+        }
+
+        let el = document.getElementById("clientGreeting");
+        if(el){
+            el.innerHTML = "Hi, " + escapeHtml(user || "Client");
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", function(){
+        setClientGreeting();
+        setTimeout(setClientGreeting, 500);
+        setTimeout(setClientGreeting, 1500);
+    });
+})();
+</script>
+
+
+<style>
+/* CLIENT CHANGE PASSWORD */
+.change-pass-btn{
+    border:0;
+    background:#0d47a1;
+    color:white;
+    padding:10px 14px;
+    border-radius:10px;
+    font-weight:900;
+    cursor:pointer;
+    margin-right:8px;
+}
+
+#changePassModal{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(15,23,42,.45);
+    z-index:9999999;
+    align-items:center;
+    justify-content:center;
+    padding:18px;
+}
+
+.change-pass-box{
+    width:430px;
+    max-width:96%;
+    background:white;
+    border-radius:18px;
+    padding:18px;
+    box-shadow:0 20px 60px rgba(0,0,0,.22);
+}
+
+.change-pass-box h2{
+    margin:0 0 12px;
+    color:#10264a;
+}
+
+.change-pass-field{
+    margin-bottom:12px;
+}
+
+.change-pass-field label{
+    display:block;
+    font-size:12px;
+    font-weight:900;
+    color:#475569;
+    margin-bottom:6px;
+}
+
+.change-pass-field input{
+    width:100%;
+    border:1px solid #cbd8ea;
+    border-radius:12px;
+    padding:11px;
+    font-weight:800;
+    color:#10264a;
+    outline:none;
+}
+
+.change-pass-actions{
+    display:flex;
+    justify-content:flex-end;
+    gap:8px;
+    margin-top:12px;
+}
+
+.change-pass-actions button{
+    border:0;
+    padding:10px 13px;
+    border-radius:10px;
+    font-weight:900;
+    cursor:pointer;
+}
+
+.pass-close{
+    background:#e5e7eb;
+    color:#111827;
+}
+
+.pass-save{
+    background:#0d47a1;
+    color:white;
+}
+
+@media(max-width:720px){
+    .change-pass-btn{
+        width:100%;
+        margin-right:0;
+        margin-bottom:8px;
+    }
+}
+</style>
+
+<div id="changePassModal">
+    <div class="change-pass-box">
+        <h2>Change Password</h2>
+
+        <div class="change-pass-field">
+            <label>Old Password</label>
+            <input id="oldClientPass" type="password" placeholder="Old password">
+        </div>
+
+        <div class="change-pass-field">
+            <label>New Password</label>
+            <input id="newClientPass" type="password" placeholder="New password">
+        </div>
+
+        <div class="change-pass-field">
+            <label>Confirm New Password</label>
+            <input id="confirmClientPass" type="password" placeholder="Confirm password">
+        </div>
+
+        <div class="change-pass-actions">
+            <button class="pass-close" type="button" onclick="closeChangePassModal()">Close</button>
+            <button class="pass-save" type="button" onclick="saveClientPassword()">Save</button>
+        </div>
+    </div>
+</div>
+
+<script>
+/* CLIENT CHANGE PASSWORD */
+(function(){
+    function ensureChangePassButton(){
+        let header = document.querySelector(".header");
+
+        if(!header || document.getElementById("changePassBtn")){
+            return;
+        }
+
+        let logoutBtn = header.querySelector(".logout");
+
+        let btn = document.createElement("button");
+        btn.id = "changePassBtn";
+        btn.className = "change-pass-btn";
+        btn.type = "button";
+        btn.innerText = "Change Pass";
+        btn.onclick = openChangePassModal;
+
+        if(logoutBtn){
+            logoutBtn.insertAdjacentElement("beforebegin", btn);
+        }else{
+            header.appendChild(btn);
+        }
+    }
+
+    window.openChangePassModal = function(){
+        document.getElementById("oldClientPass").value = "";
+        document.getElementById("newClientPass").value = "";
+        document.getElementById("confirmClientPass").value = "";
+        document.getElementById("changePassModal").style.display = "flex";
+
+        setTimeout(function(){
+            document.getElementById("oldClientPass").focus();
+        }, 100);
+    };
+
+    window.closeChangePassModal = function(){
+        document.getElementById("changePassModal").style.display = "none";
+    };
+
+    window.saveClientPassword = async function(){
+        let username = localStorage.getItem("vpnLoginUser") || "";
+        let oldPass = document.getElementById("oldClientPass").value.trim();
+        let newPass = document.getElementById("newClientPass").value.trim();
+        let confirmPass = document.getElementById("confirmClientPass").value.trim();
+
+        if(!username){
+            alert("Login user not found");
+            return;
+        }
+
+        if(!oldPass || !newPass || !confirmPass){
+            alert("Please complete all fields");
+            return;
+        }
+
+        if(newPass.length < 4){
+            alert("New password must be at least 4 characters");
+            return;
+        }
+
+        if(newPass !== confirmPass){
+            alert("New password and confirm password do not match");
+            return;
+        }
+
+        try{
+            let res = await fetch("api/change_client_password.php", {
+                method:"POST",
+                headers:{"Content-Type":"application/json"},
+                cache:"no-store",
+                body:JSON.stringify({
+                    username:username,
+                    oldPassword:oldPass,
+                    newPassword:newPass
+                })
+            });
+
+            let data = await res.json();
+
+            if(!data.ok){
+                alert(data.error || "Password change failed");
+                return;
+            }
+
+            alert("Password changed. Please login again.");
+
+            localStorage.removeItem("vpnLoggedIn");
+            localStorage.removeItem("vpnRole");
+            localStorage.removeItem("vpnLoginUser");
+
+            location.href = "/?v=password-changed";
+
+        }catch(e){
+            alert("Change password error: " + e.message);
+        }
+    };
+
+    document.addEventListener("keydown", function(e){
+        if(e.key === "Escape"){
+            let modal = document.getElementById("changePassModal");
+            if(modal && modal.style.display === "flex"){
+                closeChangePassModal();
+            }
+        }
+    });
+
+    document.addEventListener("click", function(e){
+        let modal = document.getElementById("changePassModal");
+
+        if(modal && modal.style.display === "flex" && e.target === modal){
+            closeChangePassModal();
+        }
+    });
+
+    document.addEventListener("DOMContentLoaded", function(){
+        ensureChangePassButton();
+        setTimeout(ensureChangePassButton, 500);
+        setTimeout(ensureChangePassButton, 1500);
+    });
+})();
+</script>
+
+
+<style>
+/* VPN Portal MOBILE FIT TABLE */
+@media(max-width:720px){
+    .app{
+        padding:10px !important;
+        max-width:100% !important;
+        overflow-x:hidden !important;
+    }
+
+    .panel{
+        padding:10px !important;
+        border-radius:13px !important;
+    }
+
+    .table-wrap{
+        overflow:visible !important;
+        border:0 !important;
+        border-radius:0 !important;
+    }
+
+    table{
+        min-width:0 !important;
+        width:100% !important;
+        border-collapse:separate !important;
+        border-spacing:0 10px !important;
+    }
+
+    thead{
+        display:none !important;
+    }
+
+    tbody,
+    tr,
+    td{
+        display:block !important;
+        width:100% !important;
+    }
+
+    #vpnTable tr{
+        background:#ffffff !important;
+        border:1px solid #dbe5f3 !important;
+        border-radius:14px !important;
+        padding:10px !important;
+        box-shadow:0 8px 22px rgba(15,35,70,.06) !important;
+        margin-bottom:10px !important;
+    }
+
+    #vpnTable td{
+        border-bottom:1px solid #edf2f7 !important;
+        padding:9px 2px !important;
+        display:grid !important;
+        grid-template-columns:96px 1fr !important;
+        gap:8px !important;
+        align-items:center !important;
+        font-size:12px !important;
+    }
+
+    #vpnTable td:last-child{
+        border-bottom:0 !important;
+    }
+
+    #vpnTable td::before{
+        font-size:11px !important;
+        font-weight:900 !important;
+        color:#64748b !important;
+        text-transform:uppercase !important;
+    }
+
+    #vpnTable td:nth-child(1)::before{content:"WINBOX NAME";}
+    #vpnTable td:nth-child(2)::before{content:"Address";}
+    #vpnTable td:nth-child(3)::before{content:"Script";}
+    #vpnTable td:nth-child(4)::before{content:"Online";}
+    #vpnTable td:nth-child(5)::before{content:"Uptime";}
+    #vpnTable td:nth-child(6)::before{content:"Day Left";}
+    #vpnTable td:nth-child(7)::before{content:"Switch";}
+
+    .vpn-name-wrap,
+    .vpn-name-line{
+        max-width:100% !important;
+    }
+
+    .vpn-name{
+        font-size:13px !important;
+        word-break:break-word !important;
+    }
+
+    .vpn-real-name{
+        font-size:10px !important;
+        word-break:break-word !important;
+    }
+
+    .addr{
+        max-width:100% !important;
+        width:100% !important;
+        display:block !important;
+        overflow:hidden !important;
+        text-overflow:ellipsis !important;
+        white-space:nowrap !important;
+        font-size:11px !important;
+        padding:8px !important;
+    }
+
+    .btn,
+    .nick-edit-btn{
+        font-size:11px !important;
+        padding:7px 9px !important;
+    }
+
+    .badge,
+    .day-badge,
+    .uptime-badge{
+        min-width:74px !important;
+        font-size:10px !important;
+        padding:6px 7px !important;
+    }
+
+    .toggle{
+        width:48px !important;
+        height:27px !important;
+    }
+
+    .slider:before{
+        width:21px !important;
+        height:21px !important;
+    }
+
+    .toggle input:checked + .slider:before{
+        transform:translateX(21px) !important;
+    }
+
+    .tools{
+        gap:7px !important;
+    }
+
+    .tools input,
+    .tools select,
+    .client-filter-reset{
+        font-size:12px !important;
+        padding:10px !important;
+    }
+
+    .cards{
+        grid-template-columns:1fr 1fr 1fr !important;
+        gap:7px !important;
+    }
+
+    .card{
+        padding:10px !important;
+    }
+
+    .card small{
+        font-size:10px !important;
+    }
+
+    .card b{
+        font-size:18px !important;
+    }
+
+    .header{
+        gap:8px !important;
+    }
+
+    .header h1{
+        font-size:20px !important;
+    }
+
+    .client-greeting{
+        font-size:15px !important;
+    }
+}
+</style>
+
+
+<style>
+/* CLIENT DASHBOARD DROPDOWN */
+.header #changePassBtn,
+.header .logout,
+#headerActions{
+    display:none !important;
+}
+
+.dashboard-menu-wrap{
+    position:relative;
+    margin-left:auto;
+}
+
+.dashboard-btn{
+    border:0;
+    background:#111827;
+    color:white;
+    padding:10px 14px;
+    border-radius:10px;
+    font-weight:900;
+    cursor:pointer;
+    min-width:118px;
+}
+
+.dashboard-menu{
+    display:none;
+    position:absolute;
+    right:0;
+    top:46px;
+    width:170px;
+    background:white;
+    border:1px solid #dbe5f3;
+    border-radius:13px;
+    box-shadow:0 16px 40px rgba(15,35,70,.18);
+    padding:7px;
+    z-index:999999;
+}
+
+.dashboard-menu.show{
+    display:block;
+}
+
+.dashboard-menu button{
+    width:100%;
+    border:0;
+    background:white;
+    color:#10264a;
+    text-align:left;
+    padding:11px 12px;
+    border-radius:9px;
+    font-weight:900;
+    cursor:pointer;
+}
+
+.dashboard-menu button:hover{
+    background:#eef5ff;
+}
+
+.dashboard-menu .logout-item{
+    color:#991b1b;
+}
+
+@media(max-width:720px){
+    .dashboard-btn{
+        min-width:105px;
+        padding:9px 10px;
+        font-size:12px;
+    }
+
+    .dashboard-menu{
+        top:42px;
+        width:155px;
+    }
+}
+</style>
+
+<script>
+/* CLIENT DASHBOARD DROPDOWN */
+(function(){
+    function createDashboardDropdown(){
+        let header = document.querySelector(".header");
+
+        if(!header){
+            return;
+        }
+
+        if(document.getElementById("dashboardMenuWrap")){
+            return;
+        }
+
+        let wrap = document.createElement("div");
+        wrap.id = "dashboardMenuWrap";
+        wrap.className = "dashboard-menu-wrap";
+
+        wrap.innerHTML = `
+            <button type="button" class="dashboard-btn" onclick="toggleDashboardMenu(event)">DASHBOARD ▾</button>
+            <div id="dashboardMenu" class="dashboard-menu">
+                <button type="button" onclick="dashboardChangePass()">Change Pass</button>
+                <button type="button" class="logout-item" onclick="dashboardLogout()">Logout</button>
+            </div>
+        `;
+
+        header.appendChild(wrap);
+    }
+
+    window.toggleDashboardMenu = function(e){
+        if(e){
+            e.stopPropagation();
+        }
+
+        let menu = document.getElementById("dashboardMenu");
+
+        if(!menu){
+            return;
+        }
+
+        menu.classList.toggle("show");
+    };
+
+    window.dashboardChangePass = function(){
+        let menu = document.getElementById("dashboardMenu");
+        if(menu){
+            menu.classList.remove("show");
+        }
+
+        if(typeof openChangePassModal === "function"){
+            openChangePassModal();
+        }else{
+            alert("Change password not ready");
+        }
+    };
+
+    window.dashboardLogout = function(){
+        let menu = document.getElementById("dashboardMenu");
+        if(menu){
+            menu.classList.remove("show");
+        }
+
+        if(typeof logout === "function"){
+            logout();
+        }else{
+            localStorage.removeItem("vpnLoggedIn");
+            localStorage.removeItem("vpnRole");
+            localStorage.removeItem("vpnLoginUser");
+            location.href = "/?v=logout";
+        }
+    };
+
+    document.addEventListener("click", function(e){
+        let wrap = document.getElementById("dashboardMenuWrap");
+        let menu = document.getElementById("dashboardMenu");
+
+        if(!wrap || !menu){
+            return;
+        }
+
+        if(!wrap.contains(e.target)){
+            menu.classList.remove("show");
+        }
+    });
+
+    document.addEventListener("DOMContentLoaded", function(){
+        createDashboardDropdown();
+        setTimeout(createDashboardDropdown, 500);
+        setTimeout(createDashboardDropdown, 1500);
+    });
+
+    window.addEventListener("pageshow", function(){
+        setTimeout(createDashboardDropdown, 300);
+    });
+})();
+</script>
+
+
+<style>
+/* CLIENT MOBILE SEARCH REAL FIX */
+#vpnTable tr.client-filter-hidden{
+    display:none !important;
+}
+
+@media(max-width:720px){
+    #vpnTable tr.client-filter-hidden{
+        display:none !important;
+    }
+
+    .tools{
+        display:flex !important;
+        flex-direction:column !important;
+        gap:7px !important;
+        width:100% !important;
+    }
+
+    #searchBox,
+    #statusFilter,
+    #clientFilterReset{
+        display:block !important;
+        width:100% !important;
+        min-width:0 !important;
+        height:42px !important;
+        font-size:13px !important;
+        border-radius:10px !important;
+    }
+}
+</style>
+
+<script>
+/* CLIENT MOBILE SEARCH REAL FIX */
+(function(){
+    function getRowVpnName(row){
+        return row.getAttribute("data-vpn") || "";
+    }
+
+    window.applyClientStatusFilter = function(){
+        let search = document.getElementById("searchBox");
+        let filter = document.getElementById("statusFilter");
+        let tbody = document.getElementById("vpnTable");
+
+        if(!tbody){
+            return;
+        }
+
+        let q = search ? search.value.trim().toLowerCase() : "";
+        let statusValue = filter ? filter.value : "all";
+
+        let oldNoResult = document.getElementById("clientNoSearchResult");
+        if(oldNoResult){
+            oldNoResult.remove();
+        }
+
+        let rows = Array.from(tbody.querySelectorAll("tr")).filter(row => row.id !== "clientNoSearchResult");
+        let visible = 0;
+
+        rows.forEach(row => {
+            let onlineCell = row.querySelector("[id^='online_']");
+
+            if(!onlineCell){
+                row.classList.remove("client-filter-hidden");
+                return;
+            }
+
+            let vpnName = getRowVpnName(row);
+            let nickname = "";
+
+            if(window.nicknameCache && vpnName){
+                nickname = window.nicknameCache[vpnName] || "";
+            }
+
+            let rowText = (row.innerText || "").toLowerCase();
+
+            let matchSearch =
+                !q ||
+                rowText.includes(q) ||
+                vpnName.toLowerCase().includes(q) ||
+                nickname.toLowerCase().includes(q);
+
+            let status = (onlineCell.innerText || "").trim().toLowerCase();
+
+            let matchStatus = true;
+
+            if(statusValue === "online"){
+                matchStatus = status === "online";
+            }
+
+            if(statusValue === "offline"){
+                matchStatus = status === "offline" || status === "error";
+            }
+
+            if(matchSearch && matchStatus){
+                row.classList.remove("client-filter-hidden");
+                visible++;
+            }else{
+                row.classList.add("client-filter-hidden");
+            }
+        });
+
+        if((q || statusValue !== "all") && visible === 0){
+            let tr = document.createElement("tr");
+            tr.id = "clientNoSearchResult";
+            tr.innerHTML = `<td colspan="7">No result found</td>`;
+            tbody.appendChild(tr);
+        }
+    };
+
+    function bindClientSearchMobile(){
+        let search = document.getElementById("searchBox");
+        let filter = document.getElementById("statusFilter");
+        let reset = document.getElementById("clientFilterReset");
+
+        if(search && !search.dataset.mobileSearchFixed){
+            search.dataset.mobileSearchFixed = "yes";
+            search.addEventListener("input", function(){
+                applyClientStatusFilter();
+            });
+        }
+
+        if(filter && !filter.dataset.mobileFilterFixed){
+            filter.dataset.mobileFilterFixed = "yes";
+            filter.addEventListener("change", function(){
+                applyClientStatusFilter();
+            });
+        }
+
+        if(reset && !reset.dataset.mobileResetFixed){
+            reset.dataset.mobileResetFixed = "yes";
+            reset.addEventListener("click", function(){
+                if(search) search.value = "";
+                if(filter) filter.value = "all";
+                applyClientStatusFilter();
+            });
+        }
+    }
+
+    const oldRender = window.render;
+
+    if(typeof oldRender === "function" && !window.clientMobileSearchRenderWrapped){
+        window.clientMobileSearchRenderWrapped = true;
+
+        window.render = function(){
+            oldRender();
+
+            setTimeout(function(){
+                bindClientSearchMobile();
+
+                if(typeof preloadNicknamesForSearch === "function"){
+                    preloadNicknamesForSearch().then(function(){
+                        applyClientStatusFilter();
+                    });
+                }else{
+                    applyClientStatusFilter();
+                }
+            }, 250);
+        };
+    }
+
+    const oldLoadRow = window.loadRow;
+
+    if(typeof oldLoadRow === "function" && !window.clientMobileSearchLoadRowWrapped){
+        window.clientMobileSearchLoadRowWrapped = true;
+
+        window.loadRow = async function(vpnName){
+            await oldLoadRow(vpnName);
+
+            setTimeout(function(){
+                bindClientSearchMobile();
+                applyClientStatusFilter();
+            }, 150);
+        };
+    }
+
+    document.addEventListener("DOMContentLoaded", function(){
+        setTimeout(function(){
+            bindClientSearchMobile();
+            applyClientStatusFilter();
+        }, 500);
+
+        setTimeout(function(){
+            bindClientSearchMobile();
+            applyClientStatusFilter();
+        }, 1500);
+
+        setTimeout(function(){
+            bindClientSearchMobile();
+            applyClientStatusFilter();
+        }, 3000);
+    });
+})();
+</script>
+
+
+<script>
+/* LOAD SAVED FAVICON */
+(function(){
+    async function loadSavedFavicon(){
+        try{
+            let res = await fetch("/data/favicon.json?ts=" + Date.now(), {cache:"no-store"});
+            let data = await res.json();
+
+            if(data.ok && data.href){
+                document.querySelectorAll("link[rel='icon'], link[rel='shortcut icon']").forEach(x => x.remove());
+
+                let link = document.createElement("link");
+                link.rel = "icon";
+                link.href = data.href + "?v=" + Date.now();
+                document.head.appendChild(link);
+            }
+        }catch(e){}
+    }
+
+    document.addEventListener("DOMContentLoaded", loadSavedFavicon);
+    window.addEventListener("pageshow", loadSavedFavicon);
+})();
+</script>
+
+<script>document.title = "VPN Portal";</script>
+
+<style>
+/* MOBILE SAFARI GLOBAL FIX */
+html{
+    -webkit-text-size-adjust:100% !important;
+    text-size-adjust:100% !important;
+}
+
+body{
+    -webkit-font-smoothing:antialiased;
+    overscroll-behavior:none;
+}
+
+button,
+input,
+select,
+textarea,
+a{
+    -webkit-tap-highlight-color:transparent !important;
+    touch-action:manipulation;
+}
+
+input,
+select,
+textarea{
+    font-size:16px !important;
+}
+
+button{
+    -webkit-appearance:none;
+    appearance:none;
+}
+
+@supports (-webkit-touch-callout:none){
+    body{
+        min-height:-webkit-fill-available;
+    }
+
+    .modal,
+    #nicknameModal,
+    #changePassModal,
+    #faviconModal,
+    #backupRestoreModal,
+    #viewLogsModal,
+    #adminEditClientModal{
+        min-height:-webkit-fill-available;
+        -webkit-overflow-scrolling:touch;
+    }
+
+    .dashboard-menu,
+    .admin-dashboard-menu{
+        z-index:9999999 !important;
+    }
+
+    .table-wrap{
+        -webkit-overflow-scrolling:touch;
+    }
+}
+
+@media(max-width:720px){
+    input,
+    select,
+    textarea{
+        font-size:16px !important;
+    }
+
+    .btn,
+    button{
+        cursor:pointer;
+    }
+
+    .panel,
+    .login-card,
+    .admin-edit-box,
+    .change-pass-box,
+    .backup-box,
+    .logs-box{
+        max-width:100% !important;
+    }
+}
+</style>
+
+<script>
+/* MOBILE SAFARI GLOBAL FIX */
+(function(){
+    function isIOS(){
+        return /iPad|iPhone|iPod/.test(navigator.userAgent) || 
+               (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+    }
+
+    window.isMobileSafariFix = isIOS();
+
+    // Prevent double-submit feel on iOS buttons
+    document.addEventListener("touchend", function(e){
+        let btn = e.target.closest("button");
+        if(btn){
+            btn.blur();
+        }
+    }, {passive:true});
+
+    // Sa Safari minsan stale yung layout after back/forward
+    window.addEventListener("pageshow", function(){
+        setTimeout(function(){
+            if(typeof applyClientStatusFilter === "function"){
+                applyClientStatusFilter();
+            }
+
+            if(typeof applyAdminFilter === "function"){
+                applyAdminFilter();
+            }
+
+            if(typeof applyAdminMobileSearchRealFix === "function"){
+                applyAdminMobileSearchRealFix();
+            }
+        }, 350);
+    });
+})();
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<style>
+/* CLIENT TOOLBAR CLEAN FINAL */
+.tools{
+    display:grid !important;
+    grid-template-columns:minmax(0,1fr) 67px 76px 72px !important;
+    gap:6px !important;
+    align-items:center !important;
+}
+
+#searchBox{
+    order:1 !important;
+    width:100% !important;
+    min-width:0 !important;
+}
+
+#clientFilterReset{
+    order:2 !important;
+}
+
+#clientToolbarRefresh{
+    order:3 !important;
+    border:0 !important;
+    background:#0d47a1 !important;
+    color:#fff !important;
+    border-radius:10px !important;
+    font-weight:900 !important;
+    cursor:pointer !important;
+    white-space:nowrap !important;
+}
+
+#statusFilter{
+    order:4 !important;
+    width:72px !important;
+    max-width:72px !important;
+    min-width:72px !important;
+}
+
+#clientFilterReset,
+#clientToolbarRefresh,
+#statusFilter{
+    min-height:42px !important;
+    font-size:13px !important;
+    padding-left:5px !important;
+    padding-right:5px !important;
+}
+
+#clientRefreshMenuBtn{
+    display:none !important;
+}
+
+@media(min-width:721px){
+    .tools{
+        grid-template-columns:minmax(0,1fr) auto auto 90px !important;
+        gap:8px !important;
+    }
+
+    #statusFilter{
+        width:90px !important;
+        max-width:90px !important;
+        min-width:90px !important;
+    }
+
+    #clientFilterReset,
+    #clientToolbarRefresh{
+        width:auto !important;
+        min-width:74px !important;
+        padding-left:12px !important;
+        padding-right:12px !important;
+    }
+}
+</style>
+
+<script>
+/* CLIENT TOOLBAR CLEAN FINAL */
+(function(){
+    function makeRefresh(){
+        let btn = document.getElementById("clientToolbarRefresh");
+
+        if(!btn){
+            btn = document.createElement("button");
+            btn.type = "button";
+            btn.id = "clientToolbarRefresh";
+            btn.textContent = "Refresh";
+        }
+
+        btn.onclick = function(){
+            btn.disabled = true;
+            btn.textContent = "Refreshing...";
+
+            setTimeout(function(){
+                btn.disabled = false;
+                btn.textContent = "Refresh";
+            }, 700);
+
+            try{
+                if(typeof render === "function"){
+                    render();
+                }
+
+                if(Array.isArray(myVpns) && typeof loadRow === "function"){
+                    myVpns.forEach(function(vpn){
+                        try{ loadRow(vpn); }catch(e){}
+                    });
+                }
+
+                if(typeof preloadNicknamesForSearch === "function"){
+                    preloadNicknamesForSearch();
+                }
+
+                if(typeof applyAllNicknames === "function"){
+                    setTimeout(applyAllNicknames, 500);
+                }
+
+                if(typeof applyClientStatusFilter === "function"){
+                    setTimeout(applyClientStatusFilter, 300);
+                    setTimeout(applyClientStatusFilter, 1000);
+                }
+            }catch(e){
+                console.log("Client refresh error:", e);
+            }
+        };
+
+        return btn;
+    }
+
+    function fixToolbar(){
+        let tools = document.querySelector(".tools");
+        if(!tools) return;
+
+        let search = document.getElementById("searchBox");
+        let reset = document.getElementById("clientFilterReset");
+        let filter = document.getElementById("statusFilter");
+        let refresh = makeRefresh();
+
+        // Final order: Search / Reset / Refresh / All
+        if(search) tools.appendChild(search);
+        if(reset) tools.appendChild(reset);
+        tools.appendChild(refresh);
+        if(filter) tools.appendChild(filter);
+
+        let oldMenu = document.getElementById("clientRefreshMenuBtn");
+        if(oldMenu){
+            oldMenu.remove();
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", function(){
+        fixToolbar();
+        setTimeout(fixToolbar, 500);
+        setTimeout(fixToolbar, 1500);
+        setTimeout(fixToolbar, 3000);
+    });
+
+    window.addEventListener("pageshow", function(){
+        setTimeout(fixToolbar, 300);
+    });
+})();
+</script>
+
+
+<style>
+/* CLIENT ALL SAME SIZE FIX */
+.tools{
+    grid-template-columns:minmax(0,1fr) 86px 86px 86px !important;
+}
+
+#clientFilterReset,
+#clientToolbarRefresh,
+#statusFilter{
+    width:86px !important;
+    min-width:86px !important;
+    max-width:86px !important;
+    height:42px !important;
+    min-height:42px !important;
+    box-sizing:border-box !important;
+    font-size:13px !important;
+    font-weight:900 !important;
+    text-align:center !important;
+}
+
+#statusFilter{
+    padding-left:8px !important;
+    padding-right:8px !important;
+}
+
+@media(max-width:720px){
+    .tools{
+        grid-template-columns:minmax(0,1fr) 78px 78px 78px !important;
+        gap:6px !important;
+    }
+
+    #clientFilterReset,
+    #clientToolbarRefresh,
+    #statusFilter{
+        width:78px !important;
+        min-width:78px !important;
+        max-width:78px !important;
+        height:42px !important;
+        min-height:42px !important;
+        font-size:12.5px !important;
+        padding-left:5px !important;
+        padding-right:5px !important;
+    }
+}
+</style>
+
+
+<script>
+/* FORCE VPN PORTAL TAB TITLE */
+(function(){
+    function setVpnPortalTitle(){
+        document.title = "VPN Portal";
+    }
+
+    setVpnPortalTitle();
+
+    document.addEventListener("DOMContentLoaded", setVpnPortalTitle);
+    window.addEventListener("pageshow", setVpnPortalTitle);
+
+    setTimeout(setVpnPortalTitle, 300);
+    setTimeout(setVpnPortalTitle, 1000);
+})();
+</script>
+
+
+
+
+
+<style>
+/* FINAL BRANDING LOGO LOCK */
+.login-final-logo,
+.login-clean-logo,
+.vpn-login-logo{
+    width:155px !important;
+    height:125px !important;
+    margin:0 auto 8px !important;
+    display:flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+    font-size:0 !important;
+    line-height:0 !important;
+}
+
+.login-final-logo img,
+.login-clean-logo img,
+.vpn-login-logo img{
+    width:155px !important;
+    max-width:155px !important;
+    height:auto !important;
+    display:block !important;
+    object-fit:contain !important;
+}
+</style>
+
+<script>
+/* FINAL BRANDING LOGO LOCK */
+(function(){
+    const BRAND_LOGO = "/uploads/portal-brand-logo.png?v=1782855652";
+    const FALLBACK_LOGO = "/uploads/vpn-logo.png?v=1782855652";
+
+    function setFavicon(rel, href, type){
+        let link = document.querySelector('link[rel="' + rel + '"]');
+
+        if(!link){
+            link = document.createElement("link");
+            link.rel = rel;
+            document.head.appendChild(link);
+        }
+
+        if(type) link.type = type;
+        link.href = href;
+    }
+
+    function applyFinalBrandingLogo(){
+        document.querySelectorAll(".login-final-logo, .login-clean-logo, .vpn-login-logo").forEach(function(el){
+            el.innerHTML = '<img src="' + BRAND_LOGO + '" alt="VPN Logo" onerror="this.onerror=null;this.src=\'' + FALLBACK_LOGO + '\';">';
+        });
+
+        setFavicon("icon", "/favicon.png?v=1782855652", "image/png");
+        setFavicon("shortcut icon", "/favicon.ico?v=1782855652");
+        setFavicon("apple-touch-icon", "/apple-touch-icon.png?v=1782855652");
+    }
+
+    document.addEventListener("DOMContentLoaded", function(){
+        applyFinalBrandingLogo();
+        setTimeout(applyFinalBrandingLogo,300);
+        setTimeout(applyFinalBrandingLogo,1000);
+        setTimeout(applyFinalBrandingLogo,2000);
+        setTimeout(applyFinalBrandingLogo,4000);
+    });
+
+    window.addEventListener("pageshow", function(){
+        setTimeout(applyFinalBrandingLogo,300);
+        setTimeout(applyFinalBrandingLogo,1000);
+    });
+
+    // lock para hindi na maibalik ng old late scripts
+    setInterval(applyFinalBrandingLogo, 2000);
+})();
+</script>
+
+
+<style>
+/* VPN PORTAL PAGINATION FINAL */
+.vpn-pagination-bar{
+    margin:10px 0 12px;
+    padding:10px;
+    background:#f5f8ff;
+    border:1px solid #d8e5f7;
+    border-radius:10px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+    flex-wrap:wrap;
+}
+
+.vpn-pagination-left,
+.vpn-pagination-right{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    flex-wrap:wrap;
+}
+
+.vpn-pagination-bar label{
+    font-size:13px;
+    font-weight:900;
+    color:#10264a;
+}
+
+#vpnPageSize{
+    height:36px;
+    border:1px solid #cfdcf0;
+    border-radius:8px;
+    background:#fff;
+    color:#10264a;
+    font-weight:800;
+    padding:0 8px;
+}
+
+#vpnPageInfo{
+    font-size:13px;
+    font-weight:900;
+    color:#10264a;
+}
+
+.vpn-page-btn{
+    height:36px;
+    border:0;
+    border-radius:8px;
+    background:#0d47a1;
+    color:white;
+    font-weight:900;
+    padding:0 12px;
+    cursor:pointer;
+}
+
+.vpn-page-btn:disabled{
+    background:#d6deeb;
+    color:#7a8799;
+    cursor:not-allowed;
+}
+
+.vpn-page-hidden{
+    display:none !important;
+}
+
+@media(max-width:720px){
+    .vpn-pagination-bar{
+        display:grid;
+        grid-template-columns:1fr;
+        gap:8px;
+    }
+
+    .vpn-pagination-left,
+    .vpn-pagination-right{
+        width:100%;
+        justify-content:space-between;
+    }
+
+    .vpn-page-btn{
+        flex:1;
+    }
+}
+</style>
+
+<script>
+/* VPN PORTAL PAGINATION FINAL */
+(function(){
+    let currentPage = 1;
+    let applying = false;
+    let pageSize = parseInt(localStorage.getItem("vpnPortalPageSize") || "10", 10);
+
+    if(![10,50,100].includes(pageSize)){
+        pageSize = 10;
+    }
+
+    function getTools(){
+        return document.querySelector(".tools");
+    }
+
+    function findVpnTable(){
+        let tables = Array.from(document.querySelectorAll("table"));
+
+        return tables.find(function(tbl){
+            let txt = (tbl.textContent || "").toUpperCase();
+            return txt.includes("WINBOX") ||
+                   txt.includes("VPN") ||
+                   txt.includes("UPTIME") ||
+                   txt.includes("DAY LEFT") ||
+                   txt.includes("ENABLE");
+        }) || tables[0] || null;
+    }
+
+    function getVpnRows(){
+        let table = findVpnTable();
+
+        if(table){
+            let rows = Array.from(table.querySelectorAll("tbody tr"));
+
+            if(!rows.length){
+                rows = Array.from(table.querySelectorAll("tr")).filter(function(row){
+                    return !row.querySelector("th");
+                });
+            }
+
+            return rows.filter(function(row){
+                let txt = (row.textContent || "").trim();
+                return txt && !txt.toUpperCase().includes("WINBOX NAME");
+            });
+        }
+
+        return Array.from(document.querySelectorAll(".vpn-card, .client-card, .mobile-card, .card")).filter(function(card){
+            let txt = (card.textContent || "").trim().toUpperCase();
+            return txt && (
+                txt.includes("ONLINE") ||
+                txt.includes("OFFLINE") ||
+                txt.includes("EXPIRED") ||
+                txt.includes("UPTIME") ||
+                txt.includes("DAY LEFT") ||
+                txt.includes("WINBOX")
+            );
+        });
+    }
+
+    function isVisibleByFilter(row){
+        row.classList.remove("vpn-page-hidden");
+        return window.getComputedStyle(row).display !== "none";
+    }
+
+    function getFilteredRows(){
+        return getVpnRows().filter(isVisibleByFilter);
+    }
+
+    function ensurePaginationBar(){
+        if(document.getElementById("vpnPortalPaginationBar")){
+            return;
+        }
+
+        let bar = document.createElement("div");
+        bar.id = "vpnPortalPaginationBar";
+        bar.className = "vpn-pagination-bar";
+
+        bar.innerHTML = `
+            <div class="vpn-pagination-left">
+                <label for="vpnPageSize">Show</label>
+                <select id="vpnPageSize">
+                    <option value="10">10</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                </select>
+            </div>
+
+            <div class="vpn-pagination-right">
+                <button type="button" class="vpn-page-btn" id="vpnPrevPage">Prev</button>
+                <span id="vpnPageInfo">Page 1 of 1</span>
+                <button type="button" class="vpn-page-btn" id="vpnNextPage">Next</button>
+            </div>
+        `;
+
+        let tools = getTools();
+        let table = findVpnTable();
+
+        if(tools && tools.parentNode){
+            tools.insertAdjacentElement("afterend", bar);
+        }else if(table && table.parentNode){
+            table.parentNode.insertBefore(bar, table);
+        }else{
+            document.body.appendChild(bar);
+        }
+
+        let sizeSelect = document.getElementById("vpnPageSize");
+        sizeSelect.value = String(pageSize);
+
+        sizeSelect.onchange = function(){
+            pageSize = parseInt(this.value, 10);
+            localStorage.setItem("vpnPortalPageSize", String(pageSize));
+            currentPage = 1;
+            applyVpnPagination();
+        };
+
+        document.getElementById("vpnPrevPage").onclick = function(){
+            if(currentPage > 1){
+                currentPage--;
+                applyVpnPagination();
+            }
+        };
+
+        document.getElementById("vpnNextPage").onclick = function(){
+            let total = getFilteredRows().length;
+            let pages = Math.max(1, Math.ceil(total / pageSize));
+
+            if(currentPage < pages){
+                currentPage++;
+                applyVpnPagination();
+            }
+        };
+    }
+
+    window.applyVpnPortalPagination = function(){
+        applyVpnPagination();
+    };
+
+    function applyVpnPagination(){
+        if(applying) return;
+        applying = true;
+
+        ensurePaginationBar();
+
+        let allRows = getVpnRows();
+
+        allRows.forEach(function(row){
+            row.classList.remove("vpn-page-hidden");
+        });
+
+        let visibleRows = getFilteredRows();
+        let total = visibleRows.length;
+        let pages = Math.max(1, Math.ceil(total / pageSize));
+
+        if(currentPage > pages) currentPage = pages;
+        if(currentPage < 1) currentPage = 1;
+
+        let start = (currentPage - 1) * pageSize;
+        let end = start + pageSize;
+
+        visibleRows.forEach(function(row, index){
+            if(index < start || index >= end){
+                row.classList.add("vpn-page-hidden");
+            }
+        });
+
+        let info = document.getElementById("vpnPageInfo");
+        let prev = document.getElementById("vpnPrevPage");
+        let next = document.getElementById("vpnNextPage");
+
+        if(info){
+            info.textContent = "Page " + currentPage + " of " + pages + " • " + total + " VPN";
+        }
+
+        if(prev){
+            prev.disabled = currentPage <= 1;
+        }
+
+        if(next){
+            next.disabled = currentPage >= pages;
+        }
+
+        applying = false;
+    }
+
+    function resetAndApply(){
+        currentPage = 1;
+        setTimeout(applyVpnPagination, 80);
+        setTimeout(applyVpnPagination, 400);
+        setTimeout(applyVpnPagination, 1000);
+    }
+
+    function hookControls(){
+        let search = document.getElementById("searchBox");
+        let reset = document.getElementById("clientFilterReset");
+        let filter = document.getElementById("statusFilter");
+        let refresh = document.getElementById("clientToolbarRefresh");
+
+        if(search && !search.dataset.vpnPaginationHooked){
+            search.dataset.vpnPaginationHooked = "1";
+            search.addEventListener("input", resetAndApply);
+        }
+
+        if(filter && !filter.dataset.vpnPaginationHooked){
+            filter.dataset.vpnPaginationHooked = "1";
+            filter.addEventListener("change", resetAndApply);
+        }
+
+        if(reset && !reset.dataset.vpnPaginationHooked){
+            reset.dataset.vpnPaginationHooked = "1";
+            reset.addEventListener("click", resetAndApply);
+        }
+
+        if(refresh && !refresh.dataset.vpnPaginationHooked){
+            refresh.dataset.vpnPaginationHooked = "1";
+            refresh.addEventListener("click", function(){
+                setTimeout(applyVpnPagination, 500);
+                setTimeout(applyVpnPagination, 1500);
+            });
+        }
+    }
+
+    function wrapExistingFunctions(){
+        if(typeof window.render === "function" && !window.__vpnPaginationRenderWrapped){
+            window.__vpnPaginationRenderWrapped = true;
+            const oldRender = window.render;
+
+            window.render = function(){
+                let result = oldRender.apply(this, arguments);
+                resetAndApply();
+                return result;
+            };
+        }
+
+        if(typeof window.applyClientStatusFilter === "function" && !window.__vpnPaginationFilterWrapped){
+            window.__vpnPaginationFilterWrapped = true;
+            const oldFilter = window.applyClientStatusFilter;
+
+            window.applyClientStatusFilter = function(){
+                let result = oldFilter.apply(this, arguments);
+                resetAndApply();
+                return result;
+            };
+        }
+    }
+
+    function init(){
+        ensurePaginationBar();
+        hookControls();
+        wrapExistingFunctions();
+        applyVpnPagination();
+    }
+
+    document.addEventListener("DOMContentLoaded", function(){
+        init();
+        setTimeout(init, 500);
+        setTimeout(init, 1500);
+        setTimeout(init, 3000);
+    });
+
+    window.addEventListener("pageshow", function(){
+        setTimeout(init, 300);
+    });
+
+    let timer = null;
+    const obs = new MutationObserver(function(){
+        clearTimeout(timer);
+        timer = setTimeout(function(){
+            hookControls();
+            applyVpnPagination();
+        }, 250);
+    });
+
+    obs.observe(document.body, {
+        childList:true,
+        subtree:true
+    });
+})();
+</script>
+
+
+<style>
+/* VPN CLIENT FUND FINAL */
+#clientFundBar{
+    margin:10px 0 12px !important;
+    padding:12px !important;
+    background:#f5f8ff !important;
+    border:1px solid #d8e5f7 !important;
+    border-radius:12px !important;
+    display:flex !important;
+    align-items:center !important;
+    justify-content:space-between !important;
+    gap:10px !important;
+    color:#10264a !important;
+}
+
+.clientFundAmount{
+    font-size:18px !important;
+    font-weight:900 !important;
+    color:#0d47a1 !important;
+}
+
+.clientFundLabel{
+    font-size:12px !important;
+    font-weight:900 !important;
+    color:#52627d !important;
+    margin-bottom:2px !important;
+}
+
+#clientAddFundBtn{
+    border:0 !important;
+    background:#0d47a1 !important;
+    color:white !important;
+    border-radius:10px !important;
+    height:40px !important;
+    padding:0 14px !important;
+    font-weight:900 !important;
+    cursor:pointer !important;
+}
+
+#clientFundModal{
+    position:fixed !important;
+    inset:0 !important;
+    background:rgba(0,0,0,.55) !important;
+    display:none !important;
+    align-items:center !important;
+    justify-content:center !important;
+    z-index:999999 !important;
+    padding:18px !important;
+}
+
+#clientFundModal.show{
+    display:flex !important;
+}
+
+.clientFundModalBox{
+    width:min(94vw,390px) !important;
+    background:#fff !important;
+    border-radius:16px !important;
+    padding:20px !important;
+    box-shadow:0 18px 50px rgba(0,0,0,.25) !important;
+    color:#10264a !important;
+    text-align:center !important;
+}
+
+.clientFundModalBox h3{
+    margin:0 0 8px !important;
+    font-size:20px !important;
+    font-weight:900 !important;
+}
+
+.clientFundModalBox p{
+    margin:0 0 12px !important;
+    color:#52627d !important;
+    font-size:13px !important;
+    line-height:1.35 !important;
+}
+
+#clientGcashQr{
+    width:240px !important;
+    height:240px !important;
+    object-fit:contain !important;
+    background:#f4f7ff !important;
+    border:1px solid #d8e5f7 !important;
+    border-radius:12px !important;
+    padding:8px !important;
+    margin:8px auto 12px !important;
+    display:block !important;
+}
+
+#clientFundCloseBtn{
+    width:100% !important;
+    height:44px !important;
+    border:0 !important;
+    border-radius:10px !important;
+    background:#0d47a1 !important;
+    color:white !important;
+    font-weight:900 !important;
+    cursor:pointer !important;
+}
+
+@media(max-width:720px){
+    #clientFundBar{
+        display:grid !important;
+        grid-template-columns:1fr auto !important;
+    }
+
+    .clientFundAmount{
+        font-size:16px !important;
+    }
+}
+</style>
+
+<script>
+/* VPN CLIENT FUND FINAL */
+(function(){
+    let clientFundName = "";
+
+    function money(n){
+        n = parseFloat(n || 0);
+        return "₱" + n.toLocaleString("en-PH", {
+            minimumFractionDigits:2,
+            maximumFractionDigits:2
+        });
+    }
+
+    function getClientName(){
+        const candidates = [
+            "clientUser",
+            "clientName",
+            "username",
+            "vpnUser",
+            "portalUser",
+            "loginUser",
+            "user"
+        ];
+
+        for(const k of candidates){
+            try{
+                const v = localStorage.getItem(k) || sessionStorage.getItem(k);
+                if(v && v.trim()){
+                    return v.trim();
+                }
+            }catch(e){}
+        }
+
+        const els = Array.from(document.querySelectorAll("h1,h2,h3,div,span,p"));
+        for(const el of els){
+            const txt = (el.textContent || "").trim();
+            const m = txt.match(/Hi,\s*([A-Za-z0-9._ -]+)/i);
+            if(m && m[1]){
+                return m[1].trim();
+            }
+        }
+
+        return "";
+    }
+
+    function ensureClientFundModal(){
+        if(document.getElementById("clientFundModal")) return;
+
+        const modal = document.createElement("div");
+        modal.id = "clientFundModal";
+        modal.innerHTML = `
+            <div class="clientFundModalBox">
+                <h3>Add Fund</h3>
+                <p>Scan GCash QR below. After payment, send screenshot/proof to support.</p>
+                <img id="clientGcashQr" src="/uploads/gcash-qr.png?v=${Date.now()}" onerror="this.style.display='none';document.getElementById('clientQrMissing').style.display='block';">
+                <p id="clientQrMissing" style="display:none;color:#b00020;font-weight:900;">GCash QR not uploaded yet.</p>
+                <button id="clientFundCloseBtn" type="button">Close</button>
+            </div>
+        `;
+
+        document.body.appendChild(modal);
+
+        document.getElementById("clientFundCloseBtn").onclick = function(){
+            modal.classList.remove("show");
+        };
+    }
+
+    function ensureClientFundBar(){
+        if(document.getElementById("clientFundBar")) return;
+
+        ensureClientFundModal();
+
+        const bar = document.createElement("div");
+        bar.id = "clientFundBar";
+        bar.innerHTML = `
+            <div>
+                <div class="clientFundLabel">Available Fund</div>
+                <div class="clientFundAmount" id="clientFundAmount">₱0.00</div>
+            </div>
+            <button id="clientAddFundBtn" type="button">Add Fund</button>
+        `;
+
+        const tools = document.querySelector(".tools");
+        const header =
+            document.querySelector(".client-header") ||
+            document.querySelector(".portal-header") ||
+            document.querySelector("header");
+
+        if(tools && tools.parentNode){
+            tools.insertAdjacentElement("beforebegin", bar);
+        }else if(header && header.parentNode){
+            header.insertAdjacentElement("afterend", bar);
+        }else{
+            document.body.insertBefore(bar, document.body.firstChild);
+        }
+
+        document.getElementById("clientAddFundBtn").onclick = function(){
+            ensureClientFundModal();
+            document.getElementById("clientFundModal").classList.add("show");
+        };
+    }
+
+    async function loadClientFund(){
+        ensureClientFundBar();
+
+        if(!clientFundName){
+            clientFundName = getClientName();
+        }
+
+        const amountEl = document.getElementById("clientFundAmount");
+
+        if(!clientFundName){
+            if(amountEl) amountEl.textContent = "₱0.00";
+            return;
+        }
+
+        try{
+            const res = await fetch("/api/fund_balance.php?client=" + encodeURIComponent(clientFundName) + "&v=" + Date.now());
+            const data = await res.json();
+
+            if(data.ok && amountEl){
+                amountEl.textContent = data.formatted || money(data.balance);
+            }
+        }catch(e){}
+    }
+
+    function initClientFund(){
+        ensureClientFundBar();
+        loadClientFund();
+    }
+
+    document.addEventListener("DOMContentLoaded", function(){
+        initClientFund();
+        setTimeout(initClientFund,500);
+        setTimeout(initClientFund,1500);
+        setTimeout(initClientFund,3000);
+    });
+
+    window.addEventListener("pageshow", function(){
+        setTimeout(initClientFund,300);
+    });
+
+    setInterval(loadClientFund, 10000);
+})();
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+<style>
+/* CLIENT VPN ADDRESS MODAL FINAL */
+#vpnAddressModal{
+    position:fixed !important;
+    inset:0 !important;
+    background:rgba(0,0,0,.55) !important;
+    display:none !important;
+    align-items:center !important;
+    justify-content:center !important;
+    z-index:999999 !important;
+    padding:18px !important;
+}
+
+#vpnAddressModal.show{
+    display:flex !important;
+}
+
+.vpn-address-modal-box{
+    width:min(94vw,460px) !important;
+    background:#fff !important;
+    border-radius:16px !important;
+    padding:20px !important;
+    box-shadow:0 18px 50px rgba(0,0,0,.25) !important;
+    color:#10264a !important;
+}
+
+.vpn-address-modal-box h3{
+    margin:0 0 12px !important;
+    font-size:20px !important;
+    font-weight:900 !important;
+}
+
+.vpn-address-list{
+    display:grid !important;
+    gap:10px !important;
+    margin:14px 0 !important;
+}
+
+.vpn-address-item{
+    border:1px solid #d8e5f7 !important;
+    background:#f5f8ff !important;
+    border-radius:12px !important;
+    padding:12px !important;
+}
+
+.vpn-address-label{
+    font-size:12px !important;
+    font-weight:900 !important;
+    color:#52627d !important;
+    margin-bottom:5px !important;
+}
+
+.vpn-address-value{
+    font-size:14px !important;
+    font-weight:900 !important;
+    color:#0d47a1 !important;
+    word-break:break-all !important;
+}
+
+.vpn-address-port{
+    font-size:13px !important;
+    color:#10264a !important;
+    margin-top:4px !important;
+    font-weight:800 !important;
+}
+
+.vpn-address-actions{
+    display:grid !important;
+    grid-template-columns:1fr 1fr 1fr !important;
+    gap:8px !important;
+    margin-top:14px !important;
+}
+
+.vpn-address-actions button{
+    height:42px !important;
+    border:0 !important;
+    border-radius:10px !important;
+    font-weight:900 !important;
+    cursor:pointer !important;
+}
+
+#copyWinboxAddrBtn,
+#copySshAddrBtn{
+    background:#0d47a1 !important;
+    color:#fff !important;
+}
+
+#closeVpnAddressModalBtn{
+    background:#eef2ff !important;
+    color:#10264a !important;
+}
+
+.vpn-address-clickable-safe{
+    cursor:pointer !important;
+}
+
+.vpn-address-clickable-safe:hover{
+    text-decoration:underline !important;
+}
+
+@media(max-width:520px){
+    .vpn-address-actions{
+        grid-template-columns:1fr !important;
+    }
+}
+</style>
+
+<script>
+/* CLIENT VPN ADDRESS MODAL FINAL */
+(function(){
+    if(window.__safeVpnAddressModalInstalled) return;
+    window.__safeVpnAddressModalInstalled = true;
+
+    let currentWinboxAddress = "";
+    let currentSshAddress = "";
+
+    function cleanText(s){
+        return (s || "").toString().trim().replace(/\s+/g, " ");
+    }
+
+    function findAddress(text){
+        text = cleanText(text);
+
+        const match = text.match(/([a-z0-9.-]+\.[a-z]{2,}):([0-9]{1,5})/i);
+        if(!match) return null;
+
+        const domain = match[1];
+        const portRaw = match[2];
+        const portNum = parseInt(portRaw, 10);
+
+        if(!domain || !portNum || portNum < 1 || portNum > 65535) return null;
+
+        const sshNum = Math.min(portNum + 1, 65535);
+        const sshRaw = String(sshNum).padStart(portRaw.length, "0");
+
+        return {
+            domain: domain,
+            winboxPort: portRaw,
+            sshPort: sshRaw,
+            winboxAddress: domain + ":" + portRaw,
+            sshAddress: domain + ":" + sshRaw
+        };
+    }
+
+    function isCleanAddressText(text, info){
+        text = cleanText(text);
+        if(!info) return false;
+
+        // exact address lang dapat, para hindi mahuli buong row/card/modal
+        if(text === info.winboxAddress) return true;
+
+        // allow very small wrappers only
+        if(text.includes(info.winboxAddress) && text.length <= info.winboxAddress.length + 8){
+            return true;
+        }
+
+        return false;
+    }
+
+    function getClientName(){
+        const els = Array.from(document.querySelectorAll("h1,h2,h3,div,span,p"));
+
+        for(const el of els){
+            const txt = cleanText(el.textContent);
+            const m = txt.match(/Hi,\s*([A-Za-z0-9._ -]+)/i);
+            if(m && m[1]) return m[1].trim();
+        }
+
+        return "";
+    }
+
+    function ensureModal(){
+        if(document.getElementById("vpnAddressModal")) return;
+
+        const modal = document.createElement("div");
+        modal.id = "vpnAddressModal";
+        modal.innerHTML = `
+            <div class="vpn-address-modal-box">
+                <h3>VPN Address</h3>
+
+                <div class="vpn-address-list">
+                    <div class="vpn-address-item">
+                        <div class="vpn-address-label">WINBOX</div>
+                        <div class="vpn-address-value" id="modalWinboxAddress">-</div>
+                        <div class="vpn-address-port" id="modalWinboxLocalPort">local port: loading...</div>
+                    </div>
+
+                    <div class="vpn-address-item">
+                        <div class="vpn-address-label">SSH</div>
+                        <div class="vpn-address-value" id="modalSshAddress">-</div>
+                        <div class="vpn-address-port" id="modalSshLocalPort">local port: loading...</div>
+                    </div>
+                </div>
+
+                <div class="vpn-address-actions">
+                    <button id="copyWinboxAddrBtn" type="button">Copy Winbox</button>
+                    <button id="copySshAddrBtn" type="button">Copy SSH</button>
+                    <button id="closeVpnAddressModalBtn" type="button">Close</button>
+                </div>
+            </div>
+        `;
+
+        document.body.appendChild(modal);
+
+        document.getElementById("closeVpnAddressModalBtn").onclick = function(){
+            modal.classList.remove("show");
+        };
+
+        modal.addEventListener("click", function(e){
+            if(e.target === modal){
+                modal.classList.remove("show");
+            }
+        });
+
+        document.getElementById("copyWinboxAddrBtn").onclick = function(){
+            copyText(currentWinboxAddress);
+        };
+
+        document.getElementById("copySshAddrBtn").onclick = function(){
+            copyText(currentSshAddress);
+        };
+    }
+
+    async function copyText(text){
+        if(!text) return;
+
+        try{
+            await navigator.clipboard.writeText(text);
+            alert("Copied: " + text);
+        }catch(e){
+            const ta = document.createElement("textarea");
+            ta.value = text;
+            document.body.appendChild(ta);
+            ta.select();
+            document.execCommand("copy");
+            ta.remove();
+            alert("Copied: " + text);
+        }
+    }
+
+    async function loadLocalPorts(info){
+        try{
+            const client = getClientName();
+
+            const res = await fetch(
+                "/api/local_ports.php?port=" + encodeURIComponent(info.winboxPort) +
+                "&client=" + encodeURIComponent(client) +
+                "&v=" + Date.now()
+            );
+
+            const data = await res.json();
+
+            document.getElementById("modalWinboxLocalPort").textContent =
+                "local port: " + (data.winboxLocalPort || "8291");
+
+            document.getElementById("modalSshLocalPort").textContent =
+                "local port: " + (data.sshLocalPort || "22");
+
+        }catch(e){
+            document.getElementById("modalWinboxLocalPort").textContent = "local port: 8291";
+            document.getElementById("modalSshLocalPort").textContent = "local port: 22";
+        }
+    }
+
+    function openAddressModal(info){
+        ensureModal();
+
+        currentWinboxAddress = info.winboxAddress;
+        currentSshAddress = info.sshAddress;
+
+        document.getElementById("modalWinboxAddress").textContent = info.winboxAddress;
+        document.getElementById("modalSshAddress").textContent = info.sshAddress;
+
+        document.getElementById("modalWinboxLocalPort").textContent = "local port: loading...";
+        document.getElementById("modalSshLocalPort").textContent = "local port: loading...";
+
+        document.getElementById("vpnAddressModal").classList.add("show");
+
+        loadLocalPorts(info);
+    }
+
+    function isInsideOtherModalOrInput(target){
+        if(!target) return true;
+
+        if(target.closest("#vpnAddressModal")) return true;
+
+        // huwag mag-trigger kapag nasa ibang modal
+        if(target.closest("#clientFundModal, #adminFundModal, #brandingModal, #changePasswordModal, #nicknameModal")) return true;
+        if(target.closest(".modal, [role='dialog']")) return true;
+
+        // huwag mag-trigger sa form/buttons/action buttons
+        if(target.closest("input, select, textarea")) return true;
+
+        const btn = target.closest("button");
+        if(btn){
+            const txt = cleanText(btn.textContent);
+            const info = findAddress(txt);
+            if(!info || !isCleanAddressText(txt, info)){
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    function findClickedAddressTarget(e){
+        if(isInsideOtherModalOrInput(e.target)) return null;
+
+        let el = e.target;
+
+        for(let i = 0; i < 5 && el; i++, el = el.parentElement){
+            if(!el || el === document.body || el === document.documentElement) break;
+
+            const tag = (el.tagName || "").toUpperCase();
+
+            // stop sa malalaking container para hindi mahuli buong row/table/page
+            if(["TR","TABLE","TBODY","THEAD","FORM","SECTION","MAIN","HEADER"].includes(tag)){
+                break;
+            }
+
+            const txt = cleanText(el.textContent);
+            const info = findAddress(txt);
+
+            if(info && isCleanAddressText(txt, info)){
+                return {el: el, info: info};
+            }
+        }
+
+        return null;
+    }
+
+    function markAddressElements(){
+        document.querySelectorAll("td, span, a, button, small, div").forEach(function(el){
+            if(el.closest("#vpnAddressModal")) return;
+            if(el.closest(".modal, [role='dialog']")) return;
+
+            const txt = cleanText(el.textContent);
+            const info = findAddress(txt);
+
+            if(info && isCleanAddressText(txt, info)){
+                el.classList.add("vpn-address-clickable-safe");
+                el.title = "Click to view Winbox / SSH address";
+            }
+        });
+    }
+
+    document.addEventListener("click", function(e){
+        const found = findClickedAddressTarget(e);
+        if(!found) return;
+
+        e.preventDefault();
+        e.stopPropagation();
+
+        openAddressModal(found.info);
+    }, false);
+
+    document.addEventListener("DOMContentLoaded", function(){
+        ensureModal();
+        markAddressElements();
+        setTimeout(markAddressElements, 500);
+        setTimeout(markAddressElements, 1500);
+    });
+
+    window.addEventListener("pageshow", function(){
+        setTimeout(markAddressElements, 300);
+    });
+
+    let timer = null;
+    const obs = new MutationObserver(function(){
+        clearTimeout(timer);
+        timer = setTimeout(markAddressElements, 350);
+    });
+
+    obs.observe(document.body, {
+        childList:true,
+        subtree:true
+    });
+})();
+</script>
+
+
+<script>
+/* CLIENT VPN ADDRESS LOCAL PORT FROM NAT TOPORTS */
+(function(){
+    if(window.__natToPortsModalFixInstalled) return;
+    window.__natToPortsModalFixInstalled = true;
+
+    function getText(el){
+        return (el && el.textContent ? el.textContent : "").trim().replace(/\s+/g, " ");
+    }
+
+    function findAddress(text){
+        const m = (text || "").match(/([a-z0-9.-]+\.[a-z]{2,}):([0-9]{1,5})/i);
+        if(!m) return null;
+
+        const domain = m[1];
+        const winboxPort = m[2];
+        const sshPort = String(parseInt(winboxPort,10) + 1).padStart(winboxPort.length, "0");
+
+        return {
+            domain,
+            winboxPort,
+            sshPort,
+            winboxAddress: domain + ":" + winboxPort,
+            sshAddress: domain + ":" + sshPort
+        };
+    }
+
+    function getClientName(){
+        const els = Array.from(document.querySelectorAll("h1,h2,h3,div,span,p"));
+        for(const el of els){
+            const txt = getText(el);
+            const m = txt.match(/Hi,\s*([A-Za-z0-9._ -]+)/i);
+            if(m && m[1]) return m[1].trim();
+        }
+        return "";
+    }
+
+    async function updateModalLocalPortsFromNat(info){
+        try{
+            const client = getClientName();
+
+            const res = await fetch(
+                "/api/local_ports.php?winboxPort=" + encodeURIComponent(info.winboxPort) +
+                "&client=" + encodeURIComponent(client) +
+                "&v=" + Date.now()
+            );
+
+            const data = await res.json();
+
+            const winboxLocal = data.winboxLocalPort || "8291";
+            const sshLocal = data.sshLocalPort || "22";
+
+            const w = document.getElementById("modalWinboxLocalPort");
+            const s = document.getElementById("modalSshLocalPort");
+
+            if(w) w.textContent = "local port: " + winboxLocal;
+            if(s) s.textContent = "local port: " + sshLocal;
+
+        }catch(e){
+            const w = document.getElementById("modalWinboxLocalPort");
+            const s = document.getElementById("modalSshLocalPort");
+
+            if(w) w.textContent = "local port: 8291";
+            if(s) s.textContent = "local port: 22";
+        }
+    }
+
+    document.addEventListener("click", function(e){
+        const txt = getText(e.target);
+        const info = findAddress(txt);
+
+        if(!info) return;
+
+        setTimeout(function(){
+            updateModalLocalPortsFromNat(info);
+        }, 150);
+
+        setTimeout(function(){
+            updateModalLocalPortsFromNat(info);
+        }, 600);
+    }, true);
+})();
+</script>
+
+
+<script>
+/* CLIENT LIVE CHR NAT TOPORTS FINAL */
+(function(){
+    if(window.__clientLiveChrNatToPortsFinal) return;
+    window.__clientLiveChrNatToPortsFinal = true;
+
+    function cleanText(s){
+        return (s || "").toString().trim().replace(/\s+/g, " ");
+    }
+
+    function findAddress(text){
+        const m = cleanText(text).match(/([a-z0-9.-]+\.[a-z]{2,}):([0-9]{1,5})/i);
+        if(!m) return null;
+
+        const domain = m[1];
+        const winboxPort = m[2];
+        const sshPort = String(parseInt(winboxPort, 10) + 1).padStart(winboxPort.length, "0");
+
+        return {
+            domain,
+            winboxPort,
+            sshPort,
+            winboxAddress: domain + ":" + winboxPort,
+            sshAddress: domain + ":" + sshPort
+        };
+    }
+
+    function getClientName(){
+        const els = Array.from(document.querySelectorAll("h1,h2,h3,div,span,p"));
+        for(const el of els){
+            const txt = cleanText(el.textContent);
+            const m = txt.match(/Hi,\s*([A-Za-z0-9._ -]+)/i);
+            if(m && m[1]) return m[1].trim();
+        }
+        return "";
+    }
+
+    async function updatePortsLive(info){
+        try{
+            const client = getClientName();
+
+            const url =
+                "/api/local_ports.php?domain=" + encodeURIComponent(info.domain) +
+                "&winboxPort=" + encodeURIComponent(info.winboxPort) +
+                "&client=" + encodeURIComponent(client) +
+                "&v=" + Date.now();
+
+            const res = await fetch(url, {cache:"no-store"});
+            const data = await res.json();
+
+            const w = document.getElementById("modalWinboxLocalPort");
+            const s = document.getElementById("modalSshLocalPort");
+
+            if(w) w.textContent = "local port: " + (data.winboxLocalPort || "8291");
+            if(s) s.textContent = "local port: " + (data.sshLocalPort || "22");
+
+            console.log("LIVE NAT TO-PORTS:", data);
+
+        }catch(e){
+            console.log("live nat ports error:", e);
+        }
+    }
+
+    document.addEventListener("click", function(e){
+        const info = findAddress(e.target.textContent || "");
+
+        if(!info) return;
+
+        setTimeout(function(){
+            updatePortsLive(info);
+        }, 200);
+
+        setTimeout(function(){
+            updatePortsLive(info);
+        }, 800);
+    }, true);
+})();
+</script>
+
+
+
+
+
+
+
+<style>
+/* CLIENT CUSTOM LOCAL PORT TO CHR NO PASSWORD FINAL */
+#vpnLocalPortEditBox{
+    display:none;
+    margin-top:14px;
+    padding:12px;
+    border:1px solid #d8e5f7;
+    background:#f5f8ff;
+    border-radius:12px;
+}
+
+#vpnLocalPortEditBox.show{
+    display:block;
+}
+
+#vpnLocalPortEditBox label{
+    display:block;
+    font-size:12px;
+    font-weight:900;
+    color:#10264a;
+    margin:10px 0 6px;
+}
+
+#vpnLocalPortEditBox input{
+    width:100%;
+    height:40px;
+    border:1px solid #cfdcf0;
+    border-radius:9px;
+    padding:0 10px;
+    font-weight:800;
+}
+
+#saveLocalPortsBtn{
+    width:100%;
+    height:42px;
+    margin-top:12px;
+    border:0;
+    border-radius:10px;
+    background:#0d47a1;
+    color:white;
+    font-weight:900;
+    cursor:pointer;
+}
+
+#editLocalPortsBtn{
+    background:#10264a !important;
+    color:white !important;
+}
+</style>
+
+<script>
+/* CLIENT CUSTOM LOCAL PORT TO CHR NO PASSWORD FINAL */
+(function(){
+    if(window.__clientCustomLocalPortNoPasswordFinal) return;
+    window.__clientCustomLocalPortNoPasswordFinal = true;
+
+    let lastVpnInfo = null;
+
+    function cleanText(s){
+        return (s || "").toString().trim().replace(/\s+/g, " ");
+    }
+
+    function findAddress(text){
+        const m = cleanText(text).match(/([a-z0-9.-]+\.[a-z]{2,}):([0-9]{1,5})/i);
+        if(!m) return null;
+
+        const domain = m[1];
+        const winboxPort = m[2];
+        const sshPort = String(parseInt(winboxPort, 10) + 1).padStart(winboxPort.length, "0");
+
+        return {domain, winboxPort, sshPort};
+    }
+
+    function getClientName(){
+        const els = Array.from(document.querySelectorAll("h1,h2,h3,div,span,p"));
+
+        for(const el of els){
+            const txt = cleanText(el.textContent);
+            const m = txt.match(/Hi,\s*([A-Za-z0-9._ -]+)/i);
+            if(m && m[1]) return m[1].trim();
+        }
+
+        return "";
+    }
+
+    function localPortNumberFromText(id, fallback){
+        const el = document.getElementById(id);
+        const txt = el ? cleanText(el.textContent) : "";
+        const m = txt.match(/([0-9]{1,5})/);
+        return m ? m[1] : fallback;
+    }
+
+    function ensureEditBox(){
+        const modalBox = document.querySelector("#vpnAddressModal .vpn-address-modal-box");
+        if(!modalBox) return;
+
+        let actions = modalBox.querySelector(".vpn-address-actions");
+
+        if(actions && !document.getElementById("editLocalPortsBtn")){
+            const btn = document.createElement("button");
+            btn.type = "button";
+            btn.id = "editLocalPortsBtn";
+            btn.textContent = "Edit Ports";
+            actions.insertBefore(btn, actions.firstChild);
+
+            btn.onclick = function(){
+                const box = document.getElementById("vpnLocalPortEditBox");
+                if(!box) return;
+
+                document.getElementById("editWinboxLocalPort").value =
+                    localPortNumberFromText("modalWinboxLocalPort", "8291");
+
+                document.getElementById("editSshLocalPort").value =
+                    localPortNumberFromText("modalSshLocalPort", "22");
+
+                box.classList.toggle("show");
+            };
+        }
+
+        if(document.getElementById("vpnLocalPortEditBox")) return;
+
+        const box = document.createElement("div");
+        box.id = "vpnLocalPortEditBox";
+        box.innerHTML = `
+            <label>Winbox Local Port</label>
+            <input id="editWinboxLocalPort" type="number" min="1" max="65535" placeholder="8291">
+
+            <label>SSH Local Port</label>
+            <input id="editSshLocalPort" type="number" min="1" max="65535" placeholder="22">
+
+            <button id="saveLocalPortsBtn" type="button">Save to CHR</button>
+        `;
+
+        if(actions){
+            actions.insertAdjacentElement("beforebegin", box);
+        }else{
+            modalBox.appendChild(box);
+        }
+
+        document.getElementById("saveLocalPortsBtn").onclick = saveLocalPortsToChr;
+    }
+
+    async function refreshModalLivePorts(){
+        if(!lastVpnInfo) return;
+
+        try{
+            const client = getClientName();
+            const url =
+                "/api/local_ports.php?domain=" + encodeURIComponent(lastVpnInfo.domain) +
+                "&winboxPort=" + encodeURIComponent(lastVpnInfo.winboxPort) +
+                "&client=" + encodeURIComponent(client) +
+                "&v=" + Date.now();
+
+            const res = await fetch(url, {cache:"no-store"});
+            const data = await res.json();
+
+            if(data.ok){
+                const w = document.getElementById("modalWinboxLocalPort");
+                const s = document.getElementById("modalSshLocalPort");
+
+                if(w) w.textContent = "local port: " + (data.winboxLocalPort || "8291");
+                if(s) s.textContent = "local port: " + (data.sshLocalPort || "22");
+            }
+        }catch(e){}
+    }
+
+    async function saveLocalPortsToChr(){
+        if(!lastVpnInfo){
+            alert("No VPN address selected");
+            return;
+        }
+
+        const client = getClientName();
+        const winboxLocal = document.getElementById("editWinboxLocalPort").value.trim();
+        const sshLocal = document.getElementById("editSshLocalPort").value.trim();
+
+        if(!client){
+            alert("Client name not detected");
+            return;
+        }
+
+        if(!winboxLocal || !sshLocal){
+            alert("Enter local ports");
+            return;
+        }
+
+        const btn = document.getElementById("saveLocalPortsBtn");
+        btn.disabled = true;
+        btn.textContent = "Saving...";
+
+        try{
+            const res = await fetch("/api/update_local_port.php", {
+                method:"POST",
+                headers:{"Content-Type":"application/json"},
+                body:JSON.stringify({
+                    client:client,
+                    domain:lastVpnInfo.domain,
+                    winboxPort:lastVpnInfo.winboxPort,
+                    winboxLocalPort:winboxLocal,
+                    sshLocalPort:sshLocal
+                })
+            });
+
+            const data = await res.json();
+
+            if(!data.ok){
+                alert(data.message || "Failed to update local ports");
+                btn.disabled = false;
+                btn.textContent = "Save to CHR";
+                return;
+            }
+
+            document.getElementById("modalWinboxLocalPort").textContent = "local port: " + data.winboxLocalPort;
+            document.getElementById("modalSshLocalPort").textContent = "local port: " + data.sshLocalPort;
+
+            const box = document.getElementById("vpnLocalPortEditBox");
+            if(box) box.classList.remove("show");
+
+            alert("Updated to CHR NAT");
+
+            setTimeout(refreshModalLivePorts, 500);
+
+        }catch(e){
+            alert("Error: " + e.message);
+        }
+
+        btn.disabled = false;
+        btn.textContent = "Save to CHR";
+    }
+
+    document.addEventListener("click", function(e){
+        const info = findAddress(e.target.textContent || "");
+
+        if(info){
+            lastVpnInfo = info;
+
+            setTimeout(function(){
+                ensureEditBox();
+                refreshModalLivePorts();
+            }, 300);
+
+            setTimeout(function(){
+                ensureEditBox();
+                refreshModalLivePorts();
+            }, 900);
+        }
+    }, true);
+
+    const obs = new MutationObserver(function(){
+        if(document.getElementById("vpnAddressModal")){
+            ensureEditBox();
+        }
+    });
+
+    obs.observe(document.body, {
+        childList:true,
+        subtree:true
+    });
+})();
+</script>
+
+
+<style>
+/* HARD NO PORTAL PASSWORD FINAL */
+#editLocalPortPassword{
+    display:none !important;
+}
+</style>
+
+<script>
+/* HARD NO PORTAL PASSWORD FINAL */
+(function(){
+    if(window.__hardNoPortalPasswordFinal) return;
+    window.__hardNoPortalPasswordFinal = true;
+
+    // Stop old native prompt
+    const oldPrompt = window.prompt;
+    window.prompt = function(message, def){
+        const msg = String(message || "").toLowerCase();
+        if(msg.includes("portal password")){
+            return "no-password-required";
+        }
+        return oldPrompt.call(window, message, def);
+    };
+
+    function cleanText(s){
+        return (s || "").toString().trim().replace(/\s+/g, " ");
+    }
+
+    function removePasswordField(){
+        document.querySelectorAll("#editLocalPortPassword").forEach(function(input){
+            let prev = input.previousElementSibling;
+            if(prev && cleanText(prev.textContent).toLowerCase().includes("portal password")){
+                prev.remove();
+            }
+            input.remove();
+        });
+
+        document.querySelectorAll("label").forEach(function(label){
+            if(cleanText(label.textContent).toLowerCase() === "portal password"){
+                label.remove();
+            }
+        });
+    }
+
+    function getClientName(){
+        const els = Array.from(document.querySelectorAll("h1,h2,h3,div,span,p"));
+
+        for(const el of els){
+            const txt = cleanText(el.textContent);
+            const m = txt.match(/Hi,\s*([A-Za-z0-9._ -]+)/i);
+            if(m && m[1]) return m[1].trim();
+        }
+
+        return "";
+    }
+
+    function findModalAddress(){
+        const w = document.getElementById("modalWinboxAddress");
+        const txt = cleanText(w ? w.textContent : "");
+
+        const m = txt.match(/([a-z0-9.-]+\.[a-z]{2,}):([0-9]{1,5})/i);
+        if(!m) return null;
+
+        return {
+            domain:m[1],
+            winboxPort:m[2]
+        };
+    }
+
+    async function hardSaveToChr(btn){
+        removePasswordField();
+
+        const info = findModalAddress();
+
+        if(!info){
+            alert("No VPN address selected");
+            return;
+        }
+
+        const client = getClientName();
+        const winboxLocal = (document.getElementById("editWinboxLocalPort")?.value || "").trim();
+        const sshLocal = (document.getElementById("editSshLocalPort")?.value || "").trim();
+
+        if(!client){
+            alert("Client name not detected");
+            return;
+        }
+
+        if(!winboxLocal || !sshLocal){
+            alert("Enter local ports");
+            return;
+        }
+
+        btn.disabled = true;
+        btn.textContent = "Saving...";
+
+        try{
+            const res = await fetch("/api/update_local_port.php", {
+                method:"POST",
+                headers:{"Content-Type":"application/json"},
+                body:JSON.stringify({
+                    client:client,
+                    domain:info.domain,
+                    winboxPort:info.winboxPort,
+                    winboxLocalPort:winboxLocal,
+                    sshLocalPort:sshLocal
+                })
+            });
+
+            const data = await res.json();
+
+            if(!data.ok){
+                alert(data.message || "Failed to update local ports");
+                btn.disabled = false;
+                btn.textContent = "Save to CHR";
+                return;
+            }
+
+            const w = document.getElementById("modalWinboxLocalPort");
+            const s = document.getElementById("modalSshLocalPort");
+
+            if(w) w.textContent = "local port: " + data.winboxLocalPort;
+            if(s) s.textContent = "local port: " + data.sshLocalPort;
+
+            const box = document.getElementById("vpnLocalPortEditBox");
+            if(box) box.classList.remove("show");
+
+            alert("Updated to CHR NAT");
+
+        }catch(e){
+            alert("Error: " + e.message);
+        }
+
+        btn.disabled = false;
+        btn.textContent = "Save to CHR";
+    }
+
+    // Capture click first, para hindi na mauna old script
+    document.addEventListener("click", function(e){
+        const btn = e.target.closest("#saveLocalPortsBtn");
+        if(!btn) return;
+
+        e.preventDefault();
+        e.stopPropagation();
+        e.stopImmediatePropagation();
+
+        hardSaveToChr(btn);
+    }, true);
+
+    document.addEventListener("DOMContentLoaded", function(){
+        removePasswordField();
+        setTimeout(removePasswordField,300);
+        setTimeout(removePasswordField,1000);
+        setTimeout(removePasswordField,2000);
+    });
+
+    window.addEventListener("pageshow", function(){
+        setTimeout(removePasswordField,300);
+    });
+
+    setInterval(removePasswordField, 1000);
+})();
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+<style>
+/* CLIENT WHITE THEME ENHANCE FINAL */
+:root{
+    --cw-bg:#f4f8ff;
+    --cw-card:#ffffff;
+    --cw-card2:#f8fbff;
+    --cw-border:#dbe7f6;
+    --cw-border2:#edf3fb;
+    --cw-text:#10264a;
+    --cw-muted:#64748b;
+    --cw-blue:#0d47a1;
+    --cw-blue2:#1565d8;
+    --cw-blueSoft:#eaf2ff;
+    --cw-shadow:0 14px 36px rgba(13,71,161,.10);
+    --cw-shadow2:0 8px 22px rgba(15,23,42,.07);
+}
+
+/* page background */
+html,
+body{
+    background:
+        radial-gradient(circle at top left, rgba(21,101,216,.10), transparent 32%),
+        linear-gradient(180deg,#f8fbff 0%,#eef5ff 100%) !important;
+    color:var(--cw-text) !important;
+}
+
+/* main wrappers */
+.container,
+.wrapper,
+.portal-wrapper,
+.client-wrapper,
+.main,
+.content,
+.panel,
+.card,
+.box,
+.table-wrap,
+.vpn-list,
+#clientFundBar,
+#vpnPortalPaginationBar{
+    background:var(--cw-card) !important;
+    border:1px solid var(--cw-border) !important;
+    box-shadow:var(--cw-shadow2) !important;
+}
+
+/* softer card radius */
+.container,
+.wrapper,
+.portal-wrapper,
+.client-wrapper,
+.panel,
+.card,
+.box,
+.table-wrap,
+.vpn-list,
+#clientFundBar,
+#vpnPortalPaginationBar,
+.tools,
+.toolbar{
+    border-radius:16px !important;
+}
+
+/* header area */
+header,
+.client-header,
+.portal-header{
+    background:linear-gradient(135deg,#ffffff 0%,#f2f7ff 100%) !important;
+    border:1px solid var(--cw-border) !important;
+    box-shadow:var(--cw-shadow2) !important;
+    border-radius:18px !important;
+    color:var(--cw-text) !important;
+}
+
+/* title text */
+h1,h2,h3,
+.client-title,
+.portal-title{
+    color:var(--cw-text) !important;
+    letter-spacing:-.2px !important;
+}
+
+/* by MarvinConfiguration / subtitles */
+.subtitle,
+.muted,
+small,
+.client-subtitle,
+.portal-subtitle{
+    color:var(--cw-muted) !important;
+}
+
+/* tools/search row */
+.tools,
+.toolbar,
+.filter-bar,
+.client-filter-bar{
+    background:rgba(255,255,255,.88) !important;
+    border:1px solid var(--cw-border) !important;
+    box-shadow:var(--cw-shadow2) !important;
+    padding:10px !important;
+    gap:8px !important;
+}
+
+/* inputs/select */
+input,
+select,
+textarea{
+    background:#ffffff !important;
+    color:var(--cw-text) !important;
+    border:1px solid #cfdcf0 !important;
+    border-radius:11px !important;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.65) !important;
+    outline:none !important;
+}
+
+input:focus,
+select:focus,
+textarea:focus{
+    border-color:#7fb2ff !important;
+    box-shadow:0 0 0 4px rgba(13,71,161,.10) !important;
+}
+
+/* main action buttons only */
+.tools button,
+.toolbar button,
+.filter-bar button,
+.client-filter-bar button,
+#clientAddFundBtn,
+.vpn-page-btn,
+#copyWinboxAddrBtn,
+#copySshAddrBtn,
+#saveLocalPortsBtn,
+#editLocalPortsBtn{
+    border:0 !important;
+    border-radius:11px !important;
+    background:linear-gradient(135deg,var(--cw-blue),var(--cw-blue2)) !important;
+    color:#ffffff !important;
+    font-weight:900 !important;
+    box-shadow:0 8px 18px rgba(13,71,161,.18) !important;
+}
+
+.tools button:hover,
+.toolbar button:hover,
+.filter-bar button:hover,
+.client-filter-bar button:hover,
+#clientAddFundBtn:hover,
+.vpn-page-btn:hover,
+#copyWinboxAddrBtn:hover,
+#copySshAddrBtn:hover,
+#saveLocalPortsBtn:hover,
+#editLocalPortsBtn:hover{
+    filter:brightness(1.05) !important;
+    transform:translateY(-1px) !important;
+}
+
+/* reset/close buttons softer */
+#clientFilterReset,
+#closeVpnAddressModalBtn,
+#clientFundCloseBtn{
+    background:#eef4ff !important;
+    color:var(--cw-text) !important;
+    box-shadow:none !important;
+    border:1px solid var(--cw-border) !important;
+}
+
+/* table */
+table{
+    background:#ffffff !important;
+    border:1px solid var(--cw-border) !important;
+    border-radius:16px !important;
+    overflow:hidden !important;
+    border-collapse:separate !important;
+    border-spacing:0 !important;
+    box-shadow:var(--cw-shadow2) !important;
+}
+
+thead th,
+table th{
+    background:#f1f6ff !important;
+    color:#30415f !important;
+    font-weight:900 !important;
+    border-bottom:1px solid var(--cw-border) !important;
+}
+
+tbody td,
+table td{
+    background:#ffffff !important;
+    color:var(--cw-text) !important;
+    border-bottom:1px solid var(--cw-border2) !important;
+}
+
+tbody tr:hover td{
+    background:#f8fbff !important;
+}
+
+/* clickable vpn address */
+.vpn-address-clickable-safe,
+td a,
+.copyable{
+    color:var(--cw-blue) !important;
+    font-weight:900 !important;
+}
+
+/* pagination */
+.vpn-pagination-bar{
+    background:linear-gradient(135deg,#ffffff,#f5f9ff) !important;
+    border:1px solid var(--cw-border) !important;
+    box-shadow:var(--cw-shadow2) !important;
+}
+
+/* fund bar */
+#clientFundBar{
+    background:linear-gradient(135deg,#ffffff,#f3f8ff) !important;
+    border:1px solid var(--cw-border) !important;
+    box-shadow:var(--cw-shadow2) !important;
+}
+
+.clientFundAmount{
+    color:var(--cw-blue) !important;
+}
+
+/* modal */
+#vpnAddressModal,
+#clientFundModal,
+#changePasswordModal{
+    backdrop-filter:blur(4px) !important;
+}
+
+.vpn-address-modal-box,
+.clientFundModalBox,
+.modal-box,
+.modal-content{
+    background:#ffffff !important;
+    border:1px solid var(--cw-border) !important;
+    border-radius:18px !important;
+    box-shadow:0 22px 60px rgba(15,23,42,.22) !important;
+    color:var(--cw-text) !important;
+}
+
+/* modal cards */
+.vpn-address-item{
+    background:linear-gradient(135deg,#ffffff,#f5f9ff) !important;
+    border:1px solid var(--cw-border) !important;
+    box-shadow:0 6px 16px rgba(13,71,161,.07) !important;
+}
+
+.vpn-address-value{
+    color:var(--cw-blue) !important;
+}
+
+/* edit local ports box */
+#vpnLocalPortEditBox{
+    background:#f7fbff !important;
+    border:1px solid var(--cw-border) !important;
+    border-radius:14px !important;
+}
+
+/* mobile cards */
+.admin-client-card,
+.client-card,
+.mobile-card,
+.vpn-card{
+    background:#ffffff !important;
+    border:1px solid var(--cw-border) !important;
+    border-radius:16px !important;
+    box-shadow:var(--cw-shadow2) !important;
+}
+
+/* keep switches neat */
+input[type="checkbox"]{
+    box-shadow:none !important;
+}
+
+/* mobile spacing */
+@media(max-width:720px){
+    body{
+        background:#f4f8ff !important;
+    }
+
+    .container,
+    .wrapper,
+    .portal-wrapper,
+    .client-wrapper,
+    .panel,
+    .card,
+    .box,
+    .table-wrap,
+    .vpn-list{
+        border-radius:14px !important;
+    }
+
+    .tools,
+    .toolbar,
+    .filter-bar,
+    .client-filter-bar{
+        padding:8px !important;
+        border-radius:14px !important;
+    }
+
+    input,
+    select,
+    textarea,
+    .tools button,
+    .toolbar button,
+    .filter-bar button,
+    .client-filter-bar button{
+        min-height:38px !important;
+    }
+
+    table{
+        box-shadow:none !important;
+    }
+}
+</style>
+
+
+<style>
+/* FLAT 2D BUTTON THEME FINAL */
+button,
+.btn,
+input[type="button"],
+input[type="submit"],
+.tools button,
+.toolbar button,
+.filter-bar button,
+.client-filter-bar button,
+.admin-filter-bar button,
+.menu button,
+.nav button,
+.actions button,
+.controls button,
+.vpn-page-btn,
+#copyWinboxAddrBtn,
+#copySshAddrBtn,
+#saveLocalPortsBtn,
+#editLocalPortsBtn,
+#clientAddFundBtn{
+    background:#0d47a1 !important;
+    color:#ffffff !important;
+    border:0 !important;
+    border-radius:7px !important;
+    box-shadow:none !important;
+    text-shadow:none !important;
+    transform:none !important;
+    filter:none !important;
+    font-weight:800 !important;
+    letter-spacing:0 !important;
+    padding:8px 13px !important;
+    min-height:32px !important;
+    line-height:1.1 !important;
+}
+
+/* hover simple lang */
+button:hover,
+.btn:hover,
+input[type="button"]:hover,
+input[type="submit"]:hover,
+.tools button:hover,
+.toolbar button:hover,
+.filter-bar button:hover,
+.client-filter-bar button:hover,
+.admin-filter-bar button:hover,
+.menu button:hover,
+.nav button:hover,
+.actions button:hover,
+.controls button:hover,
+.vpn-page-btn:hover,
+#copyWinboxAddrBtn:hover,
+#copySshAddrBtn:hover,
+#saveLocalPortsBtn:hover,
+#editLocalPortsBtn:hover,
+#clientAddFundBtn:hover{
+    background:#083b8a !important;
+    color:#ffffff !important;
+    box-shadow:none !important;
+    transform:none !important;
+    filter:none !important;
+}
+
+/* secondary / close / reset */
+.reset,
+.cancel,
+.close,
+.btn-light,
+.btn-secondary,
+#clientFilterReset,
+#closeVpnAddressModalBtn,
+#clientFundCloseBtn{
+    background:#e9eef7 !important;
+    color:#10264a !important;
+    border:0 !important;
+    box-shadow:none !important;
+}
+
+/* red buttons flat */
+.delete,
+.del,
+.remove,
+.danger,
+.btn-danger,
+.logout,
+button[title*="Delete"],
+button[title*="Remove"]{
+    background:#d32f2f !important;
+    color:#ffffff !important;
+    box-shadow:none !important;
+}
+
+/* green buttons flat */
+.success,
+.btn-success,
+.add,
+.create,
+.enable{
+    background:#15803d !important;
+    color:#ffffff !important;
+    box-shadow:none !important;
+}
+
+/* disabled */
+button:disabled,
+.btn:disabled{
+    background:#9aa6b8 !important;
+    color:#ffffff !important;
+    opacity:.75 !important;
+    cursor:not-allowed !important;
+    box-shadow:none !important;
+}
+
+/* smaller sa mobile */
+@media(max-width:720px){
+    button,
+    .btn,
+    input[type="button"],
+    input[type="submit"]{
+        border-radius:7px !important;
+        padding:7px 11px !important;
+        min-height:31px !important;
+        font-size:11px !important;
+    }
+}
+</style>
+
+
+<style>
+/* NICKNAME EDIT SMALL WHITE FINAL */
+.nickname-edit-small-white{
+    background:#ffffff !important;
+    color:#6b7280 !important;
+    border:1px solid #dce5f2 !important;
+    box-shadow:none !important;
+    text-shadow:none !important;
+    border-radius:6px !important;
+    padding:3px 6px !important;
+    min-height:20px !important;
+    height:22px !important;
+    font-size:9px !important;
+    font-weight:700 !important;
+    line-height:1 !important;
+    margin-left:3px !important;
+    vertical-align:middle !important;
+    opacity:.75 !important;
+}
+
+.nickname-edit-small-white:hover{
+    background:#f7faff !important;
+    color:#0d47a1 !important;
+    border-color:#cfdcf0 !important;
+    opacity:1 !important;
+    transform:none !important;
+    box-shadow:none !important;
+}
+
+@media(max-width:720px){
+    .nickname-edit-small-white{
+        padding:2px 5px !important;
+        min-height:18px !important;
+        height:20px !important;
+        font-size:8px !important;
+        margin-left:2px !important;
+        border-radius:5px !important;
+    }
+}
+</style>
+
+<script>
+/* NICKNAME EDIT SMALL WHITE FINAL */
+(function(){
+    if(window.__nicknameEditSmallWhiteFinal) return;
+    window.__nicknameEditSmallWhiteFinal = true;
+
+    function clean(s){
+        return (s || "").toString().trim().replace(/\s+/g, " ").toUpperCase();
+    }
+
+    function applyNicknameEditStyle(){
+        document.querySelectorAll("button, .btn, a").forEach(function(el){
+            const txt = clean(el.textContent);
+
+            // exact EDIT / pencil only para hindi madamay yung Edit Ports
+            const isNicknameEdit =
+                txt === "EDIT" ||
+                txt === "✎" ||
+                txt === "✏" ||
+                txt === "🖊" ||
+                txt === "🖊️";
+
+            if(!isNicknameEdit) return;
+
+            const idclass = ((el.id || "") + " " + (el.className || "") + " " + (el.getAttribute("onclick") || "")).toLowerCase();
+
+            // skip edit ports or modal controls
+            if(idclass.includes("port")) return;
+            if(idclass.includes("local")) return;
+            if(idclass.includes("save")) return;
+
+            el.classList.add("nickname-edit-small-white");
+        });
+    }
+
+    document.addEventListener("DOMContentLoaded", function(){
+        applyNicknameEditStyle();
+        setTimeout(applyNicknameEditStyle, 500);
+        setTimeout(applyNicknameEditStyle, 1500);
+    });
+
+    const obs = new MutationObserver(function(){
+        setTimeout(applyNicknameEditStyle, 100);
+    });
+
+    obs.observe(document.body, {
+        childList:true,
+        subtree:true
+    });
+
+    setInterval(applyNicknameEditStyle, 3000);
+})();
+</script>
+
+
+<style>
+/* CLIENT DROPDOWN SAFE CLEAN FINAL */
+.client-dd-btn-safe{
+    background:#0d47a1 !important;
+    color:#ffffff !important;
+    border:0 !important;
+    border-radius:7px !important;
+    box-shadow:none !important;
+    padding:7px 12px !important;
+    min-height:31px !important;
+    font-size:11px !important;
+    font-weight:900 !important;
+    cursor:pointer !important;
+    position:relative !important;
+    z-index:50 !important;
+}
+
+.client-dd-btn-safe:hover{
+    background:#083b8a !important;
+    color:#ffffff !important;
+    box-shadow:none !important;
+    transform:none !important;
+}
+
+.client-dd-menu-safe{
+    background:#ffffff !important;
+    border:1px solid #dbe7f6 !important;
+    border-radius:12px !important;
+    box-shadow:0 12px 28px rgba(15,23,42,.14) !important;
+    padding:6px !important;
+    z-index:99999 !important;
+    overflow:visible !important;
+}
+
+.client-dd-item-safe{
+    display:block !important;
+    width:100% !important;
+    background:#ffffff !important;
+    color:#10264a !important;
+    border:0 !important;
+    box-shadow:none !important;
+    border-radius:8px !important;
+    padding:8px 9px !important;
+    min-height:29px !important;
+    font-size:11px !important;
+    font-weight:850 !important;
+    text-align:left !important;
+    cursor:pointer !important;
+    pointer-events:auto !important;
+}
+
+.client-dd-item-safe:hover{
+    background:#eef4ff !important;
+    color:#0d47a1 !important;
+}
+
+.client-dd-danger-safe{
+    color:#b42318 !important;
+}
+
+.client-dd-danger-safe:hover{
+    background:#fff5f5 !important;
+    color:#b42318 !important;
+}
+
+@media(max-width:720px){
+    .client-dd-btn-safe{
+        font-size:10px !important;
+        padding:6px 10px !important;
+        min-height:29px !important;
+    }
+
+    .client-dd-menu-safe{
+        border-radius:11px !important;
+        padding:5px !important;
+        min-width:125px !important;
+    }
+
+    .client-dd-item-safe{
+        font-size:10px !important;
+        padding:7px 8px !important;
+        min-height:28px !important;
+        border-radius:7px !important;
+    }
+}
+</style>
+
+<script>
+/* CLIENT DROPDOWN SAFE CLEAN FINAL */
+(function(){
+    if(window.__clientDropdownSafeCleanFinal) return;
+    window.__clientDropdownSafeCleanFinal = true;
+
+    function clean(s){
+        return (s || "").toString().trim().replace(/\s+/g," ").toUpperCase();
+    }
+
+    function isDash(txt){
+        return txt === "DASHBOARD" || txt === "DASHBOARD ▾" || txt === "DASHBOARD ▼";
+    }
+
+    function isMenuItem(txt){
+        return (
+            txt === "CHANGE PASS" ||
+            txt === "CHANGE PASSWORD" ||
+            txt === "LOGOUT" ||
+            txt === "ADD FUND" ||
+            txt === "PROFILE"
+        );
+    }
+
+    function findMenu(btn){
+        let p = btn.parentElement;
+
+        for(let level=0; level<5 && p; level++, p=p.parentElement){
+            const items = Array.from(p.querySelectorAll("button,a,.btn")).filter(function(x){
+                return x !== btn && isMenuItem(clean(x.textContent));
+            });
+
+            if(items.length >= 1){
+                return { parent:p, items:items };
+            }
+        }
+
+        return null;
+    }
+
+    function showMenu(menu){
+        if(!menu) return;
+
+        menu.parent.classList.add("client-dd-menu-safe");
+        menu.parent.style.display = "";
+        menu.parent.style.visibility = "visible";
+        menu.parent.style.opacity = "1";
+        menu.parent.style.pointerEvents = "auto";
+        menu.parent.style.zIndex = "99999";
+
+        menu.items.forEach(function(item){
+            const txt = clean(item.textContent);
+
+            item.classList.add("client-dd-item-safe");
+            item.style.pointerEvents = "auto";
+            item.style.cursor = "pointer";
+
+            if(txt.includes("LOGOUT")){
+                item.classList.add("client-dd-danger-safe");
+            }
+        });
+    }
+
+    function apply(){
+        document.querySelectorAll("button,a,.btn").forEach(function(btn){
+            const txt = clean(btn.textContent);
+
+            if(isDash(txt)){
+                btn.classList.add("client-dd-btn-safe");
+                btn.style.pointerEvents = "auto";
+                btn.style.cursor = "pointer";
+
+                if(btn.dataset.clientDropdownSafeAttached !== "1"){
+                    btn.dataset.clientDropdownSafeAttached = "1";
+
+                    btn.addEventListener("click", function(){
+                        setTimeout(function(){
+                            showMenu(findMenu(btn));
+                        }, 30);
+
+                        setTimeout(function(){
+                            showMenu(findMenu(btn));
+                        }, 150);
+                    }, true);
+                }
+            }
+
+            if(isMenuItem(txt)){
+                btn.classList.add("client-dd-item-safe");
+
+                if(txt.includes("LOGOUT")){
+                    btn.classList.add("client-dd-danger-safe");
+                }
+            }
+        });
+    }
+
+    document.addEventListener("DOMContentLoaded", function(){
+        apply();
+        setTimeout(apply, 500);
+        setTimeout(apply, 1500);
+    });
+
+    document.addEventListener("click", function(){
+        setTimeout(apply, 80);
+    }, true);
+
+    const obs = new MutationObserver(function(){
+        setTimeout(apply, 100);
+    });
+
+    obs.observe(document.body, {
+        childList:true,
+        subtree:true,
+        attributes:true
+    });
+
+    setInterval(apply, 2500);
+})();
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+<style>
+/* CLIENT PAID VPN GENERATOR FINAL */
+#clientGenerateVpnBtn,
+.client-generate-vpn-btn-final{
+    width:auto !important;
+    min-width:118px !important;
+    height:34px !important;
+    min-height:34px !important;
+    padding:0 13px !important;
+    display:inline-flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+    background:#0d47a1 !important;
+    color:#ffffff !important;
+    border:0 !important;
+    border-radius:8px !important;
+    box-shadow:none !important;
+    font-size:11px !important;
+    font-weight:900 !important;
+    line-height:1 !important;
+    white-space:nowrap !important;
+    cursor:pointer !important;
+}
+
+#clientGenerateVpnBtn:hover,
+.client-generate-vpn-btn-final:hover{
+    background:#083b8a !important;
+}
+
+.client-paid-gen-modal{
+    position:fixed !important;
+    inset:0 !important;
+    background:rgba(15,23,42,.42) !important;
+    z-index:999999 !important;
+    display:none;
+    align-items:center !important;
+    justify-content:center !important;
+    padding:14px !important;
+}
+
+.client-paid-gen-box{
+    width:min(560px,96vw) !important;
+    background:#ffffff !important;
+    border:1px solid #dbe7f6 !important;
+    border-radius:16px !important;
+    box-shadow:0 22px 60px rgba(15,23,42,.25) !important;
+    padding:16px !important;
+    color:#10264a !important;
+}
+
+.client-paid-gen-box h3{
+    margin:0 0 12px 0 !important;
+    font-size:18px !important;
+    font-weight:900 !important;
+    color:#10264a !important;
+}
+
+.client-paid-gen-grid{
+    display:grid !important;
+    grid-template-columns:1fr 1fr !important;
+    gap:10px !important;
+}
+
+.client-paid-gen-field{
+    display:flex !important;
+    flex-direction:column !important;
+    gap:5px !important;
+}
+
+.client-paid-gen-field label{
+    font-size:11px !important;
+    font-weight:900 !important;
+    color:#334155 !important;
+}
+
+.client-paid-gen-field input,
+.client-paid-gen-field select{
+    height:38px !important;
+    border:1px solid #cfdcf0 !important;
+    border-radius:9px !important;
+    padding:0 10px !important;
+    font-size:13px !important;
+    font-weight:800 !important;
+    color:#10264a !important;
+    background:#ffffff !important;
+}
+
+.client-paid-gen-note{
+    margin:10px 0 !important;
+    padding:9px 10px !important;
+    background:#f8fbff !important;
+    border:1px solid #dbe7f6 !important;
+    border-radius:10px !important;
+    font-size:12px !important;
+    font-weight:800 !important;
+    color:#0d47a1 !important;
+}
+
+#clientPaidGenOutput{
+    width:100% !important;
+    min-height:145px !important;
+    margin-top:10px !important;
+    border:1px solid #cfdcf0 !important;
+    border-radius:10px !important;
+    background:#f8fbff !important;
+    color:#10264a !important;
+    font-size:12px !important;
+    font-family:monospace !important;
+    padding:10px !important;
+}
+
+.client-paid-gen-actions{
+    display:flex !important;
+    justify-content:flex-end !important;
+    gap:8px !important;
+    margin-top:10px !important;
+}
+
+.client-paid-gen-actions button{
+    border:0 !important;
+    border-radius:8px !important;
+    height:34px !important;
+    min-height:34px !important;
+    padding:0 13px !important;
+    font-size:11px !important;
+    font-weight:900 !important;
+    box-shadow:none !important;
+}
+
+#clientPaidGenClose{
+    background:#e9eef7 !important;
+    color:#10264a !important;
+}
+
+#clientPaidGenSubmit{
+    background:#0d47a1 !important;
+    color:#ffffff !important;
+}
+
+@media(max-width:720px){
+    .client-paid-gen-grid{
+        grid-template-columns:1fr !important;
+    }
+
+    .client-paid-gen-box{
+        padding:13px !important;
+    }
+
+    #clientGenerateVpnBtn,
+    .client-generate-vpn-btn-final{
+        min-width:108px !important;
+        height:31px !important;
+        min-height:31px !important;
+        font-size:10px !important;
+        padding:0 10px !important;
+    }
+}
+</style>
+
+<div id="clientPaidGenModal" class="client-paid-gen-modal">
+    <div class="client-paid-gen-box">
+        <h3>Generate VPN</h3>
+
+        <div class="client-paid-gen-note">
+            ₱300 per Generate & Push. Bawas lang kapag success.
+        </div>
+
+        <div class="client-paid-gen-grid">
+            <div class="client-paid-gen-field">
+                <label>VPN Name</label>
+                <input id="clientPaidGenUser" placeholder="example: myvpn1">
+            </div>
+
+            <div class="client-paid-gen-field">
+                <label>Password</label>
+                <input id="clientPaidGenPass" placeholder="default: 21">
+            </div>
+
+            <div class="client-paid-gen-field">
+                <label>CHR Target</label>
+                <select id="clientPaidGenDomain">
+                    <option value="vpn.marvincloud1.link">CHR1 - vpn.marvincloud1.link</option>
+                    <option value="vpn.marvincloud2.link">CHR2 - vpn.marvincloud2.link</option>
+                </select>
+            </div>
+
+            <div class="client-paid-gen-field">
+                <label>Winbox Port</label>
+                <input id="clientPaidGenPort" placeholder="blank = random">
+            </div>
+        </div>
+
+        <textarea id="clientPaidGenOutput" readonly placeholder="Script/result will appear here..."></textarea>
+
+        <div class="client-paid-gen-actions">
+            <button id="clientPaidGenClose" type="button">Close</button>
+            <button id="clientPaidGenSubmit" type="button">Generate & Push ₱300</button>
+        </div>
+    </div>
+</div>
+
+<script>
+/* CLIENT PAID VPN GENERATOR FINAL */
+(function(){
+    if(window.__clientPaidVpnGeneratorFinal) return;
+    window.__clientPaidVpnGeneratorFinal = true;
+
+    function clean(s){
+        return (s || "").toString().trim().replace(/\s+/g," ");
+    }
+
+    function detectClient(){
+        const keys = ["clientName","client","vpnClient","portalClient","username","loginUser"];
+
+        for(const k of keys){
+            const v = clean(localStorage.getItem(k) || sessionStorage.getItem(k) || "");
+            if(v) return v;
+        }
+
+        const body = clean(document.body.innerText || "");
+        let m = body.match(/Hi,\s*([A-Za-z0-9._ -]+)/i);
+        if(m && m[1]) return clean(m[1]);
+
+        m = body.match(/Welcome,\s*([A-Za-z0-9._ -]+)/i);
+        if(m && m[1]) return clean(m[1]);
+
+        return "";
+    }
+
+    function addGenerateButton(){
+        if(document.getElementById("clientGenerateVpnBtn")) return;
+
+        const btn = document.createElement("button");
+        btn.id = "clientGenerateVpnBtn";
+        btn.type = "button";
+        btn.className = "client-generate-vpn-btn-final";
+        btn.textContent = "Generate VPN";
+
+        const fundBar = document.getElementById("clientFundBar");
+        const addFundBtn = document.getElementById("clientAddFundBtn");
+
+        if(addFundBtn && addFundBtn.parentElement){
+            addFundBtn.parentElement.insertBefore(btn, addFundBtn.nextSibling);
+        }else if(fundBar){
+            fundBar.appendChild(btn);
+        }else{
+            document.body.insertBefore(btn, document.body.firstChild);
+        }
+
+        btn.addEventListener("click", function(){
+            document.getElementById("clientPaidGenModal").style.display = "flex";
+        });
+    }
+
+    function updateFundText(balance){
+        const peso = "₱" + Number(balance || 0).toFixed(2);
+
+        document.querySelectorAll("*").forEach(function(el){
+            if(el.children.length > 0) return;
+
+            const txt = el.textContent || "";
+            if(/Available Fund/i.test(txt) || /Fund/i.test(txt)){
+                if(/₱[0-9,.]+/.test(txt)){
+                    el.textContent = txt.replace(/₱[0-9,.]+/, peso);
+                }
+            }
+        });
+    }
+
+    async function generatePaid(){
+        const client = detectClient() || prompt("Client name?");
+        if(!client) return alert("Client name not found.");
+
+        const user = clean(document.getElementById("clientPaidGenUser").value);
+        const password = clean(document.getElementById("clientPaidGenPass").value) || "21";
+        const domain = document.getElementById("clientPaidGenDomain").value;
+        const winboxPort = clean(document.getElementById("clientPaidGenPort").value);
+
+        if(!user) return alert("Lagyan ng VPN Name.");
+
+        if(!confirm("Generate & Push costs ₱300. Tuloy?")) return;
+
+        const btn = document.getElementById("clientPaidGenSubmit");
+        const out = document.getElementById("clientPaidGenOutput");
+
+        btn.disabled = true;
+        btn.textContent = "Generating...";
+        out.value = "Generating and pushing to CHR...";
+
+        try{
+            const res = await fetch("/api/client_generate_vpn_paid.php?v=" + Date.now(), {
+                method:"POST",
+                headers:{"Content-Type":"application/json"},
+                body:JSON.stringify({
+                    client:client,
+                    user:user,
+                    password:password,
+                    domain:domain,
+                    winboxPort:winboxPort,
+                    profile:"1mbps",
+                    winboxLocalPort:"8291",
+                    sshLocalPort:"22"
+                })
+            });
+
+            const data = await res.json();
+
+            if(!data.ok){
+                out.value = data.message || "Generate failed.";
+                if(data.generate){
+                    out.value += "\n\n" + JSON.stringify(data.generate, null, 2);
+                }
+                alert(data.message || "Generate failed. Fund not deducted.");
+                return;
+            }
+
+            const gen = data.generate || {};
+            const script = gen.script || gen.clientScript || gen.vpnScript || "";
+
+            out.value =
+                (data.message || "Success") +
+                "\nNew Balance: ₱" + Number(data.balance || 0).toFixed(2) +
+                "\n\n" +
+                (script || JSON.stringify(gen, null, 2));
+
+            updateFundText(data.balance);
+
+            alert("Success! ₱300 deducted. Balance: ₱" + Number(data.balance || 0).toFixed(2));
+
+        }catch(e){
+            out.value = "Error: " + e.message;
+            alert("Error: " + e.message);
+        }finally{
+            btn.disabled = false;
+            btn.textContent = "Generate & Push ₱300";
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", function(){
+        addGenerateButton();
+
+        document.getElementById("clientPaidGenClose").addEventListener("click", function(){
+            document.getElementById("clientPaidGenModal").style.display = "none";
+        });
+
+        document.getElementById("clientPaidGenSubmit").addEventListener("click", generatePaid);
+    });
+
+    setTimeout(addGenerateButton, 600);
+    setTimeout(addGenerateButton, 1500);
+})();
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<style>
+/* CLIENT PORTAL FAST MODE FINAL */
+*{
+    scroll-behavior:auto !important;
+}
+
+button,
+a,
+.btn,
+input,
+select,
+textarea,
+[onclick],
+[role="button"]{
+    pointer-events:auto !important;
+}
+
+#clientPaidGenModal,
+#clientFundModal,
+#vpnAddressModal,
+.client-paid-gen-modal{
+    pointer-events:auto !important;
+}
+
+.client-paid-gen-box,
+.clientFundModalBox,
+.vpn-address-modal-box,
+.modal-box,
+.modal-content{
+    pointer-events:auto !important;
+}
+
+#clientPaidGenSubmit,
+#clientPaidGenClose,
+#clientFundCloseBtn,
+#closeVpnAddressModalBtn,
+#copyWinboxAddrBtn,
+#copySshAddrBtn,
+#clientAddFundBtn,
+#clientGenerateVpnBtn{
+    pointer-events:auto !important;
+    cursor:pointer !important;
+}
+
+.client-fast-hide{
+    display:none !important;
+}
+
+.client-fast-maintenance-note{
+    margin-top:6px !important;
+    padding:7px 9px !important;
+    border-radius:9px !important;
+    background:#fff7ed !important;
+    border:1px solid #fed7aa !important;
+    color:#9a3412 !important;
+    font-size:11px !important;
+    font-weight:800 !important;
+    line-height:1.25 !important;
+}
+</style>
+
+<script>
+/* CLIENT PORTAL FAST MODE FINAL */
+(function(){
+    if(window.__clientPortalFastModeFinal) return;
+    window.__clientPortalFastModeFinal = true;
+
+    const ACTIVE_DOMAIN = "vpn.marvincloud2.link";
+
+    function applyFastDefaults(){
+        const pass = document.getElementById("clientPaidGenPass");
+        const port = document.getElementById("clientPaidGenPort");
+        const domain = document.getElementById("clientPaidGenDomain");
+        const submit = document.getElementById("clientPaidGenSubmit");
+
+        if(pass){
+            pass.value = "21";
+            const box = pass.closest(".client-paid-gen-field") || pass.parentElement;
+            if(box) box.classList.add("client-fast-hide");
+        }
+
+        if(port){
+            port.value = "random";
+            const box = port.closest(".client-paid-gen-field") || port.parentElement;
+            if(box) box.classList.add("client-fast-hide");
+        }
+
+        if(domain){
+            Array.from(domain.options || []).forEach(function(opt){
+                const val = (opt.value || "").toLowerCase();
+                const txt = (opt.textContent || "").toLowerCase();
+
+                if(val.includes("vpn.marvincloud1.link") || txt.includes("chr1")){
+                    opt.disabled = true;
+                    opt.textContent = "CHR1 - vpn.marvincloud1.link (Maintenance)";
+                }
+
+                if(val.includes("vpn.marvincloud2.link") || txt.includes("chr2")){
+                    opt.disabled = false;
+                    opt.selected = true;
+                    opt.textContent = "CHR2 - vpn.marvincloud2.link";
+                }
+            });
+
+            domain.value = ACTIVE_DOMAIN;
+
+            const field = domain.closest(".client-paid-gen-field") || domain.parentElement;
+            if(field && !field.querySelector(".client-fast-maintenance-note")){
+                const note = document.createElement("div");
+                note.className = "client-fast-maintenance-note";
+                note.textContent = "Notice: CHR1 is under maintenance. CHR2 muna ang available target.";
+                field.appendChild(note);
+            }
+        }
+
+        if(submit){
+            const txt = (submit.textContent || "").toLowerCase();
+            if(txt.includes("generating") || txt.includes("saving")){
+                submit.disabled = false;
+                submit.textContent = "Generate & Push ₱300";
+            }
+            submit.style.pointerEvents = "auto";
+            submit.style.cursor = "pointer";
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", function(){
+        applyFastDefaults();
+        setTimeout(applyFastDefaults, 500);
+    });
+
+    document.addEventListener("click", function(e){
+        const t = e.target;
+
+        if(
+            t.closest("#clientGenerateVpnBtn") ||
+            t.closest("#clientPaidGenModal") ||
+            t.closest("#clientAddFundBtn") ||
+            t.closest("#clientFundModal") ||
+            t.closest("#vpnAddressModal")
+        ){
+            setTimeout(applyFastDefaults, 120);
+        }
+    }, true);
+})();
+</script>
+
+
+<style>
+/* CLIENT AUTO VPN NAME FINAL */
+#clientPaidGenUser{
+    background:#f8fbff !important;
+    color:#0d47a1 !important;
+    font-weight:900 !important;
+    cursor:not-allowed !important;
+}
+
+.client-auto-vpn-name-note{
+    margin-top:6px !important;
+    padding:7px 9px !important;
+    border-radius:9px !important;
+    background:#eef6ff !important;
+    border:1px solid #bfdbfe !important;
+    color:#0d47a1 !important;
+    font-size:11px !important;
+    font-weight:800 !important;
+    line-height:1.25 !important;
+}
+</style>
+
+<script>
+/* CLIENT AUTO VPN NAME FINAL */
+(function(){
+    if(window.__clientAutoVpnNameFinal) return;
+    window.__clientAutoVpnNameFinal = true;
+
+    function clean(s){
+        return (s || "").toString().trim().replace(/\s+/g," ");
+    }
+
+    function getClientName(){
+        if(window.clientPaidGenGetClientName){
+            const n = clean(window.clientPaidGenGetClientName());
+            if(n) return n;
+        }
+
+        const lines = (document.body.innerText || "").split(/\n+/);
+
+        for(const line of lines){
+            const m = clean(line).match(/^Hi,\s*([A-Za-z0-9._-]+)/i);
+            if(m && m[1]) return clean(m[1]);
+        }
+
+        return "";
+    }
+
+    function visibleNamesFallback(){
+        const names = [];
+        const table = Array.from(document.querySelectorAll("table")).find(function(t){
+            const h = (t.querySelector("thead")?.innerText || "").toUpperCase();
+            return h.includes("WINBOX NAME") || h.includes("VPN ADDRESS");
+        });
+
+        if(!table) return names;
+
+        table.querySelectorAll("tbody tr").forEach(function(row){
+            const first = row.children[0];
+            if(!first) return;
+
+            const txt = clean(first.innerText || "");
+            const firstLine = clean(txt.split(/\n/)[0] || "");
+
+            if(firstLine) names.push(firstLine);
+        });
+
+        return names;
+    }
+
+    function computeNextLocal(client, names){
+        client = clean(client);
+        names = names.map(clean).filter(Boolean);
+
+        let base = client.replace(/\d+$/,"");
+        if(!base) base = client || "vpn";
+
+        const groups = {};
+
+        names.forEach(function(n){
+            const m = n.match(/^(.+?)(\d+)$/);
+            if(!m) return;
+
+            const prefix = m[1];
+            const num = parseInt(m[2],10);
+
+            if(!groups[prefix]) groups[prefix] = {count:0,max:0};
+
+            groups[prefix].count++;
+            if(num > groups[prefix].max) groups[prefix].max = num;
+        });
+
+        if(groups[base]){
+            return base + (groups[base].max + 1);
+        }
+
+        let best = null;
+
+        Object.keys(groups).forEach(function(prefix){
+            if(!best || groups[prefix].count > groups[best].count || groups[prefix].max > groups[best].max){
+                best = prefix;
+            }
+        });
+
+        if(best){
+            return best + (groups[best].max + 1);
+        }
+
+        return base + "1";
+    }
+
+    async function fillAutoVpnName(){
+        const input = document.getElementById("clientPaidGenUser");
+        if(!input) return;
+
+        const client = getClientName();
+        if(!client) return;
+
+        input.readOnly = true;
+        input.placeholder = "Auto VPN Name...";
+        input.style.pointerEvents = "none";
+
+        try{
+            const res = await fetch("/api/client_next_vpn_name.php?client=" + encodeURIComponent(client) + "&v=" + Date.now(), {
+                cache:"no-store"
+            });
+
+            const data = await res.json();
+
+            if(data && data.ok && data.next){
+                input.value = data.next;
+            }else{
+                input.value = computeNextLocal(client, visibleNamesFallback());
+            }
+        }catch(e){
+            input.value = computeNextLocal(client, visibleNamesFallback());
+        }
+
+        const box = input.closest(".client-paid-gen-field") || input.parentElement;
+
+        if(box && !box.querySelector(".client-auto-vpn-name-note")){
+            const note = document.createElement("div");
+            note.className = "client-auto-vpn-name-note";
+            note.textContent = "Auto VPN Name: susunod na number ang gagamitin.";
+            box.appendChild(note);
+        }
+    }
+
+    function relabel(){
+        const input = document.getElementById("clientPaidGenUser");
+        if(!input) return;
+
+        const box = input.closest(".client-paid-gen-field") || input.parentElement;
+        if(!box) return;
+
+        const label = box.querySelector("label");
+        if(label) label.textContent = "VPN Name (Auto)";
+    }
+
+    function apply(){
+        relabel();
+        fillAutoVpnName();
+    }
+
+    document.addEventListener("DOMContentLoaded", function(){
+        setTimeout(apply, 400);
+        setTimeout(apply, 1200);
+    });
+
+    document.addEventListener("click", function(e){
+        const t = e.target;
+
+        if(
+            t.closest("#clientGenerateVpnBtn") ||
+            t.closest("#clientPaidGenModal") ||
+            t.closest("#clientPaidGenSubmit")
+        ){
+            setTimeout(apply, 200);
+        }
+    }, true);
+})();
+</script>
+
+
+<style>
+/* ADD FUND SIZE ONLY FINAL */
+#clientFundBar{
+    display:flex !important;
+    align-items:center !important;
+    justify-content:space-between !important;
+    gap:8px !important;
+    flex-wrap:nowrap !important;
+}
+
+#clientAddFundBtn{
+    width:auto !important;
+    min-width:82px !important;
+    max-width:105px !important;
+    height:32px !important;
+    min-height:32px !important;
+    padding:0 11px !important;
+    flex:0 0 auto !important;
+    display:inline-flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+    white-space:nowrap !important;
+    font-size:11px !important;
+    font-weight:900 !important;
+    border-radius:7px !important;
+    margin:0 !important;
+}
+
+@media(max-width:720px){
+    #clientAddFundBtn{
+        min-width:76px !important;
+        max-width:95px !important;
+        height:30px !important;
+        min-height:30px !important;
+        padding:0 9px !important;
+        font-size:10px !important;
+    }
+}
+</style>
+
+
+<style>
+/* ADD FUND + GENERATE SIDE BY SIDE FINAL */
+#clientFundBar{
+    display:flex !important;
+    align-items:center !important;
+    justify-content:space-between !important;
+    gap:10px !important;
+    flex-wrap:nowrap !important;
+}
+
+#clientFundBar > *:first-child{
+    flex:1 1 auto !important;
+    min-width:0 !important;
+}
+
+/* buttons side by side */
+#clientAddFundBtn,
+#clientGenerateVpnBtn{
+    width:auto !important;
+    min-width:92px !important;
+    max-width:120px !important;
+    height:32px !important;
+    min-height:32px !important;
+    padding:0 11px !important;
+    flex:0 0 auto !important;
+    display:inline-flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+    white-space:nowrap !important;
+    font-size:11px !important;
+    font-weight:900 !important;
+    border-radius:7px !important;
+    margin:0 !important;
+}
+
+/* kung nasa same parent sila, dikit/ayos gap */
+#clientAddFundBtn + #clientGenerateVpnBtn,
+#clientGenerateVpnBtn + #clientAddFundBtn{
+    margin-left:6px !important;
+}
+
+/* prevent full width from old button theme */
+#clientFundBar button{
+    flex:0 0 auto !important;
+}
+
+@media(max-width:720px){
+    #clientFundBar{
+        gap:6px !important;
+    }
+
+    #clientAddFundBtn,
+    #clientGenerateVpnBtn{
+        min-width:78px !important;
+        max-width:100px !important;
+        height:30px !important;
+        min-height:30px !important;
+        padding:0 8px !important;
+        font-size:10px !important;
+        border-radius:7px !important;
+    }
+
+    #clientAddFundBtn + #clientGenerateVpnBtn,
+    #clientGenerateVpnBtn + #clientAddFundBtn{
+        margin-left:4px !important;
+    }
+}
+</style>
+
+
+<style>
+/* SAFE PAYMENT CONFIRMATION BUTTON FINAL */
+#clientPaymentConfirmBtn{
+    width:100% !important;
+    height:38px !important;
+    min-height:38px !important;
+    display:flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+    background:#0d47a1 !important;
+    color:#ffffff !important;
+    border:0 !important;
+    border-radius:9px !important;
+    box-shadow:none !important;
+    text-decoration:none !important;
+    font-size:12px !important;
+    font-weight:900 !important;
+    margin:10px 0 8px 0 !important;
+    cursor:pointer !important;
+    pointer-events:auto !important;
+}
+
+#clientPaymentConfirmBtn:hover{
+    background:#083b8a !important;
+    color:#ffffff !important;
+    text-decoration:none !important;
+}
+
+.client-payment-confirm-note{
+    font-size:11px !important;
+    font-weight:700 !important;
+    color:#64748b !important;
+    text-align:center !important;
+    margin:0 0 8px 0 !important;
+}
+</style>
+
+<script>
+/* SAFE PAYMENT CONFIRMATION BUTTON FINAL */
+(function(){
+    if(window.__safePaymentConfirmationButtonFinal) return;
+    window.__safePaymentConfirmationButtonFinal = true;
+
+    const FB_PROFILE = "https://facebook.com/marvinqmarvida";
+
+    function addPaymentConfirmation(){
+        const modal = document.getElementById("clientFundModal");
+        if(!modal) return;
+
+        if(modal.querySelector("#clientPaymentConfirmBtn")) return;
+
+        const btn = document.createElement("a");
+        btn.id = "clientPaymentConfirmBtn";
+        btn.href = FB_PROFILE;
+        btn.target = "_blank";
+        btn.rel = "noopener noreferrer";
+        btn.textContent = "Payment Confirmation";
+
+        const note = document.createElement("div");
+        note.className = "client-payment-confirm-note";
+        note.textContent = "After payment, send screenshot/proof to my Facebook profile.";
+
+        const closeBtn = Array.from(modal.querySelectorAll("button,a")).find(function(el){
+            return (el.textContent || "").trim().toLowerCase() === "close";
+        });
+
+        if(closeBtn && closeBtn.parentElement){
+            closeBtn.parentElement.insertBefore(btn, closeBtn);
+            closeBtn.parentElement.insertBefore(note, closeBtn);
+        }else{
+            modal.appendChild(btn);
+            modal.appendChild(note);
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", function(){
+        addPaymentConfirmation();
+    });
+
+    document.addEventListener("click", function(e){
+        if(e.target.closest("#clientAddFundBtn")){
+            setTimeout(addPaymentConfirmation, 150);
+        }
+    });
+})();
+</script>
+
+</body>
+</html>

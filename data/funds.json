@@ -1,0 +1,64 @@
+{
+    "test1": {
+        "balance": 1000,
+        "history": [
+            {
+                "type": "add",
+                "amount": 300,
+                "old_balance": 0,
+                "new_balance": 300,
+                "date": "2026-07-02 18:56:45"
+            },
+            {
+                "type": "add",
+                "amount": 300,
+                "old_balance": 300,
+                "new_balance": 600,
+                "date": "2026-07-02 21:49:05"
+            },
+            {
+                "type": "add",
+                "amount": 300,
+                "old_balance": 0,
+                "new_balance": 300,
+                "date": "2026-07-02 22:08:15"
+            },
+            {
+                "type": "add",
+                "amount": 300,
+                "old_balance": 0,
+                "new_balance": 300,
+                "date": "2026-07-02 22:11:44"
+            },
+            {
+                "type": "add",
+                "amount": 300,
+                "old_balance": 0,
+                "new_balance": 300,
+                "date": "2026-07-02 22:17:34"
+            },
+            {
+                "type": "add",
+                "amount": 900,
+                "old_balance": 300,
+                "new_balance": 1200,
+                "date": "2026-07-02 22:25:33"
+            },
+            {
+                "type": "add",
+                "amount": 1500,
+                "old_balance": 0,
+                "new_balance": 1500,
+                "date": "2026-07-02 22:52:43"
+            },
+            {
+                "type": "add",
+                "amount": 1500,
+                "old_balance": 0,
+                "new_balance": 1500,
+                "date": "2026-07-02 23:01:21"
+            }
+        ],
+        "updated": "2026-07-02 23:01:21"
+    }
+}

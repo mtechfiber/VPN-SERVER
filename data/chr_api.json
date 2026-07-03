@@ -1,0 +1,14 @@
+{
+  "vpn.marvincloud1.link": {
+    "host": "165.245.190.162",
+    "user": "portal-api",
+    "pass": "#7225Marvin",
+    "port": 8728
+  },
+  "vpn.marvincloud2.link": {
+    "host": "152.42.226.151",
+    "user": "portal-api",
+    "pass": "#7225Marvin",
+    "port": 8728
+  }
+}
