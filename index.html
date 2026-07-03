@@ -1,0 +1,1187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<!-- REAL UPLOAD BRANDING FAVICON START -->
+<link rel="shortcut icon" type="image/x-icon" href="/favicons/brand-1783017298.ico">
+<link rel="icon" type="image/x-icon" href="/favicons/brand-1783017298.ico">
+<link rel="icon" type="image/png" sizes="512x512" href="/favicons/brand-1783017298.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-1783017298.png">
+<meta name="theme-color" content="#0d47a1">
+<meta name="apple-mobile-web-app-title" content="VPN Portal">
+<meta name="application-name" content="VPN Portal">
+<!-- REAL UPLOAD BRANDING FAVICON END -->
+
+
+<!-- REAL BRAND FAVICON SYNC START -->
+<!-- REAL BRAND FAVICON SYNC END -->
+
+
+
+
+
+
+
+
+
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CLIENT PORTAL</title>
+
+<style>
+*{box-sizing:border-box;font-family:Arial,sans-serif}
+body{
+    margin:0;
+    min-height:100vh;
+    background:linear-gradient(135deg,#eef5ff,#ffffff,#edf4ff);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:18px;
+    color:#10264a;
+}
+.login-card{
+    width:430px;
+    max-width:100%;
+    background:white;
+    border-radius:24px;
+    padding:28px;
+    box-shadow:0 18px 45px rgba(15,35,70,.10);
+}
+.login-brand{
+    text-align:center;
+    margin-bottom:22px;
+}
+.login-brand h1{
+    margin:0;
+    font-size:26px;
+    font-weight:900;
+    letter-spacing:.5px;
+}
+.login-brand p{
+    margin:5px 0 0;
+    color:#64748b;
+    font-weight:400;
+    font-size:11px;
+}
+.field{margin-bottom:14px}
+.field label{
+    display:block;
+    font-size:12px;
+    color:#475569;
+    font-weight:900;
+    margin-bottom:6px;
+}
+.field input{
+    width:100%;
+    border:1px solid #cbd8ea;
+    border-radius:12px;
+    padding:12px;
+    font-weight:800;
+    color:#10264a;
+    outline:none;
+    background:white;
+}
+.pass-wrap{position:relative}
+.pass-wrap input{padding-right:78px!important}
+.pass-toggle{
+    position:absolute;
+    right:9px;
+    top:50%;
+    transform:translateY(-50%);
+    border:0;
+    background:#eef5ff;
+    color:#0d47a1;
+    font-size:12px;
+    font-weight:900;
+    padding:7px 10px;
+    border-radius:8px;
+    cursor:pointer;
+}
+.login-btn{
+    width:100%;
+    border:0;
+    background:#111827;
+    color:white;
+    height:48px;
+    border-radius:13px;
+    font-weight:900;
+    cursor:pointer;
+    margin-top:6px;
+}
+.by{
+    text-align:center;
+    margin-top:20px;
+    font-size:12px;
+    color:#64748b;
+    font-weight:400;
+}
+.by a{
+    color:#0d47a1;
+    text-decoration:none;
+    font-weight:400;
+}
+.by a:hover{text-decoration:underline}
+
+
+/* LOGIN HELP TEXT */
+.login-help-text{
+    text-align:center;
+    margin-top:14px;
+    margin-bottom:4px;
+    font-size:11px;
+    line-height:1.45;
+    color:#64748b;
+    font-weight:400;
+}
+
+
+/* LOGIN BUTTON BLUE THEME */
+.login-btn{
+    background:linear-gradient(135deg,#0d47a1,#1d4ed8) !important;
+    color:#ffffff !important;
+    box-shadow:0 10px 22px rgba(29,78,216,.22) !important;
+}
+
+.login-btn:hover{
+    background:linear-gradient(135deg,#0b3b86,#1e40af) !important;
+}
+
+.login-btn:active{
+    transform:scale(.99);
+}
+
+</style>
+
+
+
+
+
+
+
+<style>
+/* LOGIN FINAL REBUILD CLEAN */
+body.login-final-rebuild-page{
+    background:linear-gradient(135deg,#f7fbff 0%,#eef5ff 52%,#ffffff 100%) !important;
+}
+
+.login-final-rebuild-card{
+    width:min(92vw,420px) !important;
+    margin:38px auto !important;
+    padding:28px 24px !important;
+    background:#fff !important;
+    border:1px solid rgba(13,71,161,.12) !important;
+    border-radius:18px !important;
+    box-shadow:0 18px 50px rgba(15,52,96,.16) !important;
+    color:#12224a !important;
+    font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif !important;
+}
+
+.login-final-rebuild-card *{
+    box-sizing:border-box !important;
+}
+
+.login-final-hidden-old{
+    display:none !important;
+}
+
+.login-final-ui{
+    display:block !important;
+    width:100% !important;
+}
+
+.login-final-hero{
+    text-align:center !important;
+    margin-bottom:22px !important;
+}
+
+.login-final-logo{
+    font-size:54px !important;
+    line-height:1 !important;
+    margin-bottom:12px !important;
+}
+
+.login-final-title{
+    margin:0 !important;
+    color:#071d52 !important;
+    font-size:31px !important;
+    line-height:1.05 !important;
+    font-weight:900 !important;
+}
+
+.login-final-subtitle{
+    margin:8px 0 0 !important;
+    color:#495b7c !important;
+    font-size:13px !important;
+    font-weight:700 !important;
+}
+
+.login-final-welcome{
+    margin:18px 0 0 !important;
+    color:#5a6883 !important;
+    font-size:13px !important;
+    font-weight:700 !important;
+}
+
+.login-final-label{
+    display:block !important;
+    margin:14px 0 8px !important;
+    color:#152858 !important;
+    font-size:13px !important;
+    font-weight:900 !important;
+}
+
+.login-final-input-wrap{
+    width:100% !important;
+    margin:0 !important;
+    padding:0 !important;
+}
+
+.login-final-input-wrap input{
+    width:100% !important;
+    height:48px !important;
+    border:1px solid #d6dfef !important;
+    border-radius:10px !important;
+    background:#fff !important;
+    color:#1d2b4f !important;
+    padding:0 14px !important;
+    font-size:15px !important;
+    outline:none !important;
+    box-shadow:none !important;
+}
+
+.login-final-input-wrap input:focus{
+    border-color:#0d6efd !important;
+    box-shadow:0 0 0 4px rgba(13,110,253,.10) !important;
+}
+
+.login-final-pass-wrap{
+    position:relative !important;
+    display:block !important;
+    width:100% !important;
+}
+
+.login-final-pass-wrap input{
+    padding-right:84px !important;
+}
+
+#loginFinalShowBtn{
+    position:absolute !important;
+    right:7px !important;
+    top:50% !important;
+    transform:translateY(-50%) !important;
+    width:58px !important;
+    min-width:58px !important;
+    max-width:58px !important;
+    height:34px !important;
+    min-height:34px !important;
+    max-height:34px !important;
+    margin:0 !important;
+    padding:0 !important;
+    border:0 !important;
+    border-radius:9px !important;
+    background:#eef2ff !important;
+    color:#2d43d6 !important;
+    font-size:12px !important;
+    font-weight:900 !important;
+    box-shadow:none !important;
+    display:flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+    cursor:pointer !important;
+    z-index:5 !important;
+}
+
+.login-final-login-btn{
+    width:100% !important;
+    height:48px !important;
+    min-height:48px !important;
+    margin-top:22px !important;
+    border:0 !important;
+    border-radius:11px !important;
+    background:#0b1020 !important;
+    color:#fff !important;
+    font-size:14px !important;
+    font-weight:900 !important;
+    letter-spacing:.3px !important;
+    box-shadow:none !important;
+    cursor:pointer !important;
+}
+
+.login-final-helpbox{
+    margin-top:22px !important;
+    padding:18px !important;
+    background:#f2f6ff !important;
+    border:1px solid rgba(13,71,161,.10) !important;
+    border-radius:14px !important;
+    display:grid !important;
+    grid-template-columns:52px 1fr !important;
+    gap:12px !important;
+    align-items:center !important;
+}
+
+.login-final-help-icon{
+    font-size:30px !important;
+}
+
+.login-final-help-title{
+    margin:0 0 6px !important;
+    color:#11245a !important;
+    font-size:13px !important;
+    font-weight:900 !important;
+}
+
+.login-final-help-text{
+    margin:0 !important;
+    color:#4f5f7b !important;
+    font-size:13px !important;
+    line-height:1.35 !important;
+    font-weight:600 !important;
+}
+
+.login-final-help-text a{
+    color:#0d47a1 !important;
+    font-weight:900 !important;
+    text-decoration:none !important;
+}
+
+@media(max-width:520px){
+    .login-final-rebuild-card{
+        width:min(92vw,390px) !important;
+        margin:26px auto !important;
+        padding:24px 20px !important;
+        border-radius:16px !important;
+    }
+
+    .login-final-title{
+        font-size:29px !important;
+    }
+}
+</style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body>
+
+<div class="login-card">
+    <div class="login-brand">
+        <h1>VPN SERVER</h1>
+        <p>Secure Remote Access</p>
+    </div>
+
+    <div class="field">
+        <label>Username</label>
+        <input id="username" type="text" placeholder="Username" autocomplete="off">
+    </div>
+
+    <div class="field">
+        <label>Password</label>
+        <div class="pass-wrap">
+            <input id="password" type="password" placeholder="Password" autocomplete="off">
+            <button type="button" class="pass-toggle" id="passToggleBtn" onclick="toggleLoginPassword()">Show</button>
+        </div>
+    </div>
+
+    <button class="login-btn" onclick="clientLogin()">LOGIN</button>
+
+    
+<div class="login-help-text">
+    Need help? Contact support for VPN setup or connection issues.
+</div>
+
+
+<div class="by">
+        contact us: <a href="https://www.facebook.com/marvinqmarvida" target="_blank" rel="noopener">MarvinConfiguration</a>
+    </div>
+</div>
+
+<script>
+function toggleLoginPassword(){
+    let pass = document.getElementById("password");
+    let btn = document.getElementById("passToggleBtn");
+
+    if(pass.type === "password"){
+        pass.type = "text";
+        btn.innerText = "Hide";
+    }else{
+        pass.type = "password";
+        btn.innerText = "Show";
+    }
+}
+
+async function loadClients(){
+    try{
+        let res = await fetch("/api/clients_store.php?ts=" + Date.now(), {cache:"no-store"});
+        let data = await res.json();
+
+        if(data.ok && Array.isArray(data.clients)){
+            return data.clients;
+        }
+    }catch(e){}
+
+    return [];
+}
+
+async function clientLogin(){
+    let u = document.getElementById("username").value.trim();
+    let p = document.getElementById("password").value.trim();
+
+    if(!u || !p){
+        alert("Please enter username and password");
+        return;
+    }
+
+    let clients = await loadClients();
+
+    let found = clients.find(c => {
+        let userOk = String(c.username || "").trim() === u;
+        let portalPass = String(c.portalPassword || "").trim();
+        let oldPass = String(c.password || "").trim();
+        let passOk = portalPass ? (portalPass === p) : (oldPass === p);
+        return userOk && passOk;
+    });
+
+    if(!found){
+        alert("Invalid client login");
+        return;
+    }
+
+    localStorage.setItem("vpnLoggedIn","yes");
+    localStorage.setItem("vpnRole","client");
+    localStorage.setItem("vpnLoginUser",u);
+
+    location.href = "/client2.html?v=" + Date.now();
+}
+
+document.addEventListener("keydown", function(e){
+    if(e.key === "Enter"){
+        clientLogin();
+    }
+});
+
+document.addEventListener("DOMContentLoaded", function(){
+    if(localStorage.getItem("vpnLoggedIn") === "yes" && localStorage.getItem("vpnRole") === "client"){
+        location.href = "/client2.html?v=" + Date.now();
+    }
+});
+</script>
+
+<script>document.title = "CLIENT PORTAL";</script>
+
+<style>
+/* MOBILE SAFARI GLOBAL FIX */
+html{
+    -webkit-text-size-adjust:100% !important;
+    text-size-adjust:100% !important;
+}
+
+body{
+    -webkit-font-smoothing:antialiased;
+    overscroll-behavior:none;
+}
+
+button,
+input,
+select,
+textarea,
+a{
+    -webkit-tap-highlight-color:transparent !important;
+    touch-action:manipulation;
+}
+
+input,
+select,
+textarea{
+    font-size:16px !important;
+}
+
+button{
+    -webkit-appearance:none;
+    appearance:none;
+}
+
+@supports (-webkit-touch-callout:none){
+    body{
+        min-height:-webkit-fill-available;
+    }
+
+    .modal,
+    #nicknameModal,
+    #changePassModal,
+    #faviconModal,
+    #backupRestoreModal,
+    #viewLogsModal,
+    #adminEditClientModal{
+        min-height:-webkit-fill-available;
+        -webkit-overflow-scrolling:touch;
+    }
+
+    .dashboard-menu,
+    .admin-dashboard-menu{
+        z-index:9999999 !important;
+    }
+
+    .table-wrap{
+        -webkit-overflow-scrolling:touch;
+    }
+}
+
+@media(max-width:720px){
+    input,
+    select,
+    textarea{
+        font-size:16px !important;
+    }
+
+    .btn,
+    button{
+        cursor:pointer;
+    }
+
+    .panel,
+    .login-card,
+    .admin-edit-box,
+    .change-pass-box,
+    .backup-box,
+    .logs-box{
+        max-width:100% !important;
+    }
+}
+</style>
+
+<script>
+/* MOBILE SAFARI GLOBAL FIX */
+(function(){
+    function isIOS(){
+        return /iPad|iPhone|iPod/.test(navigator.userAgent) || 
+               (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+    }
+
+    window.isMobileSafariFix = isIOS();
+
+    // Prevent double-submit feel on iOS buttons
+    document.addEventListener("touchend", function(e){
+        let btn = e.target.closest("button");
+        if(btn){
+            btn.blur();
+        }
+    }, {passive:true});
+
+    // Sa Safari minsan stale yung layout after back/forward
+    window.addEventListener("pageshow", function(){
+        setTimeout(function(){
+            if(typeof applyClientStatusFilter === "function"){
+                applyClientStatusFilter();
+            }
+
+            if(typeof applyAdminFilter === "function"){
+                applyAdminFilter();
+            }
+
+            if(typeof applyAdminMobileSearchRealFix === "function"){
+                applyAdminMobileSearchRealFix();
+            }
+        }, 350);
+    });
+})();
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+/* LOGIN FINAL REBUILD CLEAN */
+(function(){
+    let done = false;
+
+    function norm(s){
+        return (s || "").toString().trim().replace(/\s+/g," ").toUpperCase();
+    }
+
+    function visible(el){
+        if(!el) return false;
+        const st = window.getComputedStyle(el);
+        return st.display !== "none" &&
+               st.visibility !== "hidden" &&
+               st.opacity !== "0" &&
+               el.offsetWidth > 0 &&
+               el.offsetHeight > 0;
+    }
+
+    function findLoginButton(scope){
+        return Array.from(scope.querySelectorAll("button,input[type='submit']")).find(function(btn){
+            let t = norm(btn.textContent || btn.value || "");
+            return visible(btn) && (t.includes("LOGIN") || t.includes("SIGN IN"));
+        });
+    }
+
+    function findPassword(scope){
+        return Array.from(scope.querySelectorAll("input")).find(function(i){
+            let type = ((i.getAttribute("type") || i.type || "") + "").toLowerCase();
+            let ph = norm(i.placeholder);
+            let id = norm(i.id);
+            let name = norm(i.name);
+
+            return visible(i) && (
+                type === "password" ||
+                ph.includes("PASSWORD") ||
+                id.includes("PASS") ||
+                name.includes("PASS")
+            );
+        });
+    }
+
+    function findUser(scope, pass){
+        return Array.from(scope.querySelectorAll("input")).find(function(i){
+            let type = ((i.getAttribute("type") || i.type || "") + "").toLowerCase();
+            return i !== pass &&
+                   visible(i) &&
+                   type !== "hidden" &&
+                   type !== "submit" &&
+                   type !== "checkbox";
+        });
+    }
+
+    function findScope(){
+        let forms = Array.from(document.querySelectorAll("form"));
+
+        for(let form of forms){
+            let pass = findPassword(form);
+            let btn = findLoginButton(form);
+
+            if(pass && btn){
+                return form;
+            }
+        }
+
+        let pass = findPassword(document);
+        if(!pass) return null;
+
+        let candidates = [
+            pass.closest(".login-card"),
+            pass.closest(".login-box"),
+            pass.closest(".auth-card"),
+            pass.closest(".card"),
+            pass.closest(".panel"),
+            pass.closest("form"),
+            pass.parentElement
+        ].filter(Boolean);
+
+        for(let c of candidates){
+            if(findLoginButton(c)){
+                return c;
+            }
+        }
+
+        return null;
+    }
+
+    function removeOldShowButtons(scope){
+        Array.from(scope.querySelectorAll("button")).forEach(function(btn){
+            let t = norm(btn.textContent);
+            if(t === "SHOW" || t === "HIDE"){
+                btn.remove();
+            }
+        });
+    }
+
+    function cleanBuild(){
+        if(done) return;
+
+        let scope = findScope();
+        if(!scope) return;
+
+        let pass = findPassword(scope);
+        let user = findUser(scope, pass);
+        let loginBtn = findLoginButton(scope);
+
+        if(!pass || !user || !loginBtn) return;
+
+        done = true;
+
+        document.body.classList.add("login-final-rebuild-page");
+
+        let isAdmin = location.pathname.toLowerCase().includes("/admin");
+        let title = isAdmin ? "ADMIN PORTAL" : "VPN SERVER";
+
+        document.title = title;
+
+        let card = scope;
+        card.classList.add("login-final-rebuild-card");
+
+        removeOldShowButtons(scope);
+
+        let oldChildren = Array.from(card.children);
+
+        let ui = document.createElement("div");
+        ui.className = "login-final-ui";
+        ui.innerHTML = `
+            <div class="login-final-hero">
+                <div class="login-final-logo">🛡️</div>
+                <h1 class="login-final-title">${title}</h1>
+                <p class="login-final-subtitle">Secure Remote Access</p>
+                <p class="login-final-welcome">Welcome back! Please login to your account.</p>
+            </div>
+
+            <label class="login-final-label">Username</label>
+            <div class="login-final-input-wrap" id="loginFinalUserWrap"></div>
+
+            <label class="login-final-label">Password</label>
+            <div class="login-final-input-wrap login-final-pass-wrap" id="loginFinalPassWrap"></div>
+
+            <div id="loginFinalButtonWrap"></div>
+
+            <div class="login-final-helpbox">
+                <div class="login-final-help-icon">🎧</div>
+                <div>
+                    <p class="login-final-help-title">Need help?</p>
+                    <p class="login-final-help-text">
+                        Contact support for VPN setup<br>
+                        or connection issues.<br><br>
+                        Contact us: <a href="https://www.facebook.com/marvinqmarvida" target="_blank" rel="noopener">MarvinConfiguration</a>
+                    </p>
+                </div>
+            </div>
+        `;
+
+        card.appendChild(ui);
+
+        oldChildren.forEach(function(child){
+            if(child !== ui){
+                child.classList.add("login-final-hidden-old");
+            }
+        });
+
+        user.placeholder = "Enter your username";
+        pass.placeholder = "Enter your password";
+
+        document.getElementById("loginFinalUserWrap").appendChild(user);
+        document.getElementById("loginFinalPassWrap").appendChild(pass);
+
+        let showBtn = document.createElement("button");
+        showBtn.type = "button";
+        showBtn.id = "loginFinalShowBtn";
+        showBtn.textContent = "Show";
+        showBtn.onclick = function(e){
+            e.preventDefault();
+            e.stopPropagation();
+
+            pass.type = pass.type === "password" ? "text" : "password";
+            showBtn.textContent = pass.type === "text" ? "Hide" : "Show";
+        };
+
+        document.getElementById("loginFinalPassWrap").appendChild(showBtn);
+
+        loginBtn.classList.add("login-final-login-btn");
+
+        if(loginBtn.tagName === "INPUT"){
+            loginBtn.value = "LOGIN";
+        }else{
+            loginBtn.textContent = "LOGIN";
+        }
+
+        document.getElementById("loginFinalButtonWrap").appendChild(loginBtn);
+
+        pass.style.setProperty("padding-right","84px","important");
+    }
+
+    document.addEventListener("DOMContentLoaded", function(){
+        cleanBuild();
+        setTimeout(cleanBuild,300);
+        setTimeout(cleanBuild,1000);
+        setTimeout(cleanBuild,2000);
+    });
+
+    window.addEventListener("pageshow", function(){
+        setTimeout(cleanBuild,300);
+    });
+})();
+</script>
+
+
+
+
+
+<style>
+/* LOGIN BLUE BUTTON FINAL */
+.login-final-login-btn,
+.login-final-rebuild-card .login-final-login-btn,
+.login-final-rebuild-card button.login-final-login-btn,
+.login-final-rebuild-card input[type="submit"].login-final-login-btn{
+    background:linear-gradient(135deg,#1269ff,#004bd6) !important;
+    color:#ffffff !important;
+    box-shadow:0 10px 22px rgba(0,77,214,.25) !important;
+}
+
+.login-final-login-btn:hover,
+.login-final-rebuild-card .login-final-login-btn:hover{
+    filter:brightness(.98) !important;
+}
+</style>
+
+
+<style>
+/* RESTORE VISIBLE LOGIN BUTTON FINAL */
+#loginFinalVisibleBtn{
+    width:100% !important;
+    height:48px !important;
+    min-height:48px !important;
+    margin-top:18px !important;
+    margin-bottom:0 !important;
+    border:0 !important;
+    border-radius:11px !important;
+    background:linear-gradient(135deg,#1269ff,#004bd6) !important;
+    color:#ffffff !important;
+    font-size:14px !important;
+    font-weight:900 !important;
+    letter-spacing:.3px !important;
+    box-shadow:0 10px 22px rgba(0,77,214,.25) !important;
+    cursor:pointer !important;
+    display:flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+}
+
+#loginFinalVisibleBtn:active{
+    transform:scale(.99) !important;
+}
+</style>
+
+<script>
+/* RESTORE VISIBLE LOGIN BUTTON FINAL */
+(function(){
+    function norm(s){
+        return (s || "").toString().trim().replace(/\s+/g," ").toUpperCase();
+    }
+
+    function visible(el){
+        if(!el) return false;
+        const st = window.getComputedStyle(el);
+        return st.display !== "none" &&
+               st.visibility !== "hidden" &&
+               st.opacity !== "0" &&
+               el.offsetWidth > 0 &&
+               el.offsetHeight > 0;
+    }
+
+    function findCard(){
+        return document.querySelector(".login-final-rebuild-card") ||
+               document.querySelector(".login-clean-final-card") ||
+               document.querySelector(".vpn-login-card-skin") ||
+               document.querySelector(".login-card") ||
+               document.querySelector(".login-box") ||
+               document.querySelector(".auth-card") ||
+               document.querySelector("form") ||
+               document.body;
+    }
+
+    function findOriginalLogin(card){
+        const buttons = Array.from(card.querySelectorAll("button,input[type='submit']"));
+
+        return buttons.find(function(btn){
+            if(btn.id === "loginFinalVisibleBtn") return false;
+
+            let t = norm(btn.textContent || btn.value || "");
+            return t.includes("LOGIN") || t.includes("SIGN IN");
+        });
+    }
+
+    function doOriginalLogin(){
+        let card = findCard();
+        let original = findOriginalLogin(card);
+
+        if(original){
+            original.click();
+            return;
+        }
+
+        let form =
+            card.closest("form") ||
+            card.querySelector("form") ||
+            document.querySelector("form");
+
+        if(form){
+            if(typeof form.requestSubmit === "function"){
+                form.requestSubmit();
+            }else{
+                form.submit();
+            }
+            return;
+        }
+
+        // fallback sa possible old login functions
+        if(typeof login === "function"){
+            login();
+            return;
+        }
+
+        if(typeof adminLogin === "function"){
+            adminLogin();
+            return;
+        }
+
+        if(typeof doLogin === "function"){
+            doLogin();
+            return;
+        }
+
+        alert("Login function not found. Please press Enter after password.");
+    }
+
+    function restoreLoginButton(){
+        let card = findCard();
+        if(!card) return;
+
+        let existingVisibleLogin = Array.from(card.querySelectorAll("button,input[type='submit']")).find(function(btn){
+            if(btn.id === "loginFinalVisibleBtn") return false;
+            let t = norm(btn.textContent || btn.value || "");
+            return visible(btn) && (t.includes("LOGIN") || t.includes("SIGN IN"));
+        });
+
+        if(existingVisibleLogin){
+            existingVisibleLogin.classList.add("login-final-login-btn");
+            return;
+        }
+
+        let btn = document.getElementById("loginFinalVisibleBtn");
+
+        if(!btn){
+            btn = document.createElement("button");
+            btn.type = "button";
+            btn.id = "loginFinalVisibleBtn";
+            btn.textContent = "LOGIN";
+            btn.onclick = function(e){
+                e.preventDefault();
+                doOriginalLogin();
+            };
+        }
+
+        let help = card.querySelector(".login-final-helpbox") ||
+                   card.querySelector(".login-clean-helpbox") ||
+                   card.querySelector(".vpn-login-helpbox");
+
+        if(help){
+            help.parentNode.insertBefore(btn, help);
+        }else{
+            card.appendChild(btn);
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", function(){
+        restoreLoginButton();
+        setTimeout(restoreLoginButton,300);
+        setTimeout(restoreLoginButton,1000);
+        setTimeout(restoreLoginButton,2000);
+    });
+
+    window.addEventListener("pageshow", function(){
+        setTimeout(restoreLoginButton,300);
+    });
+})();
+</script>
+
+
+
+
+
+
+
+<style>
+/* LOGIN NORMAL TEXT WEIGHT FIX */
+.login-final-welcome,
+.login-clean-welcome,
+.vpn-login-welcome{
+    font-weight:400 !important;
+}
+
+.login-final-help-text,
+.login-clean-help-text,
+.vpn-login-help-text{
+    font-weight:400 !important;
+}
+
+.login-final-help-text a,
+.login-clean-help-text a,
+.vpn-login-help-text a{
+    font-weight:700 !important;
+}
+</style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<style>
+/* FINAL BRANDING LOGO LOCK */
+.login-final-logo,
+.login-clean-logo,
+.vpn-login-logo{
+    width:155px !important;
+    height:125px !important;
+    margin:0 auto 8px !important;
+    display:flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+    font-size:0 !important;
+    line-height:0 !important;
+}
+
+.login-final-logo img,
+.login-clean-logo img,
+.vpn-login-logo img{
+    width:155px !important;
+    max-width:155px !important;
+    height:auto !important;
+    display:block !important;
+    object-fit:contain !important;
+}
+</style>
+
+<script>
+/* FINAL BRANDING LOGO LOCK */
+(function(){
+    const BRAND_LOGO = "/uploads/portal-brand-logo.png?v=1782855652";
+    const FALLBACK_LOGO = "/uploads/vpn-logo.png?v=1782855652";
+
+    function setFavicon(rel, href, type){
+        let link = document.querySelector('link[rel="' + rel + '"]');
+
+        if(!link){
+            link = document.createElement("link");
+            link.rel = rel;
+            document.head.appendChild(link);
+        }
+
+        if(type) link.type = type;
+        link.href = href;
+    }
+
+    function applyFinalBrandingLogo(){
+        document.querySelectorAll(".login-final-logo, .login-clean-logo, .vpn-login-logo").forEach(function(el){
+            el.innerHTML = '<img src="' + BRAND_LOGO + '" alt="VPN Logo" onerror="this.onerror=null;this.src=\'' + FALLBACK_LOGO + '\';">';
+        });
+
+        setFavicon("icon", "/favicon.png?v=1782855652", "image/png");
+        setFavicon("shortcut icon", "/favicon.ico?v=1782855652");
+        setFavicon("apple-touch-icon", "/apple-touch-icon.png?v=1782855652");
+    }
+
+    document.addEventListener("DOMContentLoaded", function(){
+        applyFinalBrandingLogo();
+        setTimeout(applyFinalBrandingLogo,300);
+        setTimeout(applyFinalBrandingLogo,1000);
+        setTimeout(applyFinalBrandingLogo,2000);
+        setTimeout(applyFinalBrandingLogo,4000);
+    });
+
+    window.addEventListener("pageshow", function(){
+        setTimeout(applyFinalBrandingLogo,300);
+        setTimeout(applyFinalBrandingLogo,1000);
+    });
+
+    // lock para hindi na maibalik ng old late scripts
+    setInterval(applyFinalBrandingLogo, 2000);
+})();
+</script>
+
+</body>
+</html>
